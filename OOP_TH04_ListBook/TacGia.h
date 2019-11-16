@@ -1,17 +1,15 @@
 ﻿#ifndef _TACGIA_H_
 #define _TACGIA_H_
-#include"User.h"
-#include<vector>
-#include"ListBook.h"
-
-class TacGia:public User
+#include"Account.h"
+class TacGia:public Account
 {
 private:
 	vector<Sach*> dsSach;
 public:
 	TacGia();
-	~TacGia();
-	void addBook();
+	TacGia(string ten, string pass);
+	~TacGia() {};
+	void addBook(Sach* a);
 	//thêm sách mới vào danh sách của Tác Giả
 
 	void getData(ListBook& l);
@@ -20,10 +18,11 @@ public:
 	void printTacGiaListBook();
 	//in sách của Tác Giả
 
+	
 	Sach* findSachfromTacGiaList(string tensach);
 	//tìm và trả về con trỏ trỏ đến sách trong ListBook có tên được truyền vào trong số Sách của Tác Giả
 
-	int updateTenSach(string tensach, string tensachmoi);
+	int updateTenSach(string tensach);
 	//cập nhật lại tên sách
 
 	void funRunUpdateNameBook();
@@ -34,6 +33,10 @@ public:
 
 	void funRundeleBook();
 	//hàm run cho hàm deleBook..
+
+	int printMenu();
+
+	virtual void funRunMenu(ListBook& lb);
 };
 
 

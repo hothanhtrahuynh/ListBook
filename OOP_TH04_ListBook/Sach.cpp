@@ -1,4 +1,6 @@
-﻿
+﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS	
+
 #include "Sach.h"
 
 Sach::Sach()
@@ -8,6 +10,7 @@ Sach::Sach()
 	gia = -1;
 	tacGia = "noname";
 	NXB = "noname";
+	anTacGia = anNXB = false;
 }
 
 Sach::Sach(string a, int b, float c)
@@ -15,7 +18,9 @@ Sach::Sach(string a, int b, float c)
 	tensach = a;
 	masach = b;
 	gia = c;
+	anTacGia = anNXB = false;
 }
+
 
 Sach::Sach(const Sach& a)
 {
@@ -24,6 +29,8 @@ Sach::Sach(const Sach& a)
 	gia = a.gia;
 	tacGia = a.tacGia;
 	NXB = a.NXB;
+	anTacGia = a.anNXB;
+	anNXB = a.anNXB;
 }
 
 void Sach::setGia(float a)
@@ -51,6 +58,16 @@ void Sach::setNXB(string nxb)
 	this->NXB = nxb;
 }
 
+void Sach::setAnTacGia(bool a)
+{
+	anTacGia = a;
+}
+
+void Sach::setAnNXB(bool a)
+{
+	anNXB = a;
+}
+
 int Sach::getMaSach()
 {
 	return masach;
@@ -76,6 +93,22 @@ string Sach::getNXB()
 	return string(NXB);
 }
 
+bool Sach::getAnTacGia()
+{
+	return anTacGia;
+}
+
+bool Sach::getAnNXB()
+{
+	return anNXB;
+}
+
+Sach* Sach::getBook()
+{
+	this->Nhap();
+	return this;
+}
+
 void Sach::Nhap()
 {
 	cout << "Nhap vao ma sach: ";
@@ -89,8 +122,6 @@ void Sach::Nhap()
 	getline(cin, NXB);
 	cout << "Nhap vao gia sach: ";
 	cin >> this->gia;
-	
-
 }
 
 void Sach::Xuat()
@@ -110,39 +141,41 @@ void Sach::Xuat()
 	// TODO: insert return statement here
 }*/
 
-//void Sach::filetoSach(char *a)
-//{
-//	
-//	char c[5] = "\t";
-//	char* p = NULL;
-//	p = strtok(a, c);
-//	if (p == NULL) return;
-//	int ms;
-//	ms = atoi(p);
-//	setMaSach(ms);
-//	for (int i = 0; i <= 3; i++)
-//	{
-//		p = strtok(NULL, c);
-//		switch (i)
-//		{
-//			case 0://set tên Sách
-//				setTenSach(p);
-//				break;
-//			case 1://set tên Tác giả
-//				setTacGia(p);
-//				break;
-//			case 2://set tên Nhà Xuất Bản
-//				setNXB(p);
-//			break;
-//			case 3://set giá sách
-//			{
-//				float gia = float(atof(p));
-//				setGia(gia);
-//			}break;
-//		}
-//	}
-//
-//}
+void Sach::filetoSach(char *a)
+{
+	
+	char c[5] = "\t";
+	char* p = NULL;
+	p = strtok(a, c);
+	if (p == NULL) return;
+	int ms;
+	ms = atoi(p);
+	setMaSach(ms);
+	for (int i = 0; i <= 3; i++)
+	{
+		p = strtok(NULL, c);
+		switch (i)
+		{
+			case 0://set tên Sách
+				setTenSach(p);
+				break;
+			case 1://set tên Tác giả
+				setTacGia(p);
+				break;
+			case 2://set tên Nhà Xuất Bản
+				setNXB(p);
+			break;
+			case 3://set giá sách
+			{
+				float gia = float(atof(p));
+				setGia(gia);
+			}break;
+		}
+	}
+
+}
+
+
 
 Sach::~Sach()
 {

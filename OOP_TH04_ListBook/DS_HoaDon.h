@@ -7,6 +7,7 @@ class DS_HoaDon
 private:
 	vector <HoaDon> dshd;
 public:
+	bool checkEmpty();
 	void themHoaDon(ListBook &a);
 	void xuatDSHoaDon();
 	void xoaHoaDon();

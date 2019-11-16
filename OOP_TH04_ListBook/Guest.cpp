@@ -13,13 +13,16 @@ Guest::~Guest()
 
 void Guest::timSach(ListBook& l)
 {
+	
 	string ten;
-	cout << "Ten sach can tim la: "; cin >> ten;
-	Sach a;
+	
+	Sach *a;
 	do
 	{
-		a = *l.timSach_Ten(ten);
-		if (a.getGiaSach() == -1)
+		cin.ignore();
+		cout << "Ten sach can tim la: "; getline(cin, ten);
+		a = l.timSach_Ten(ten);
+		if (a == NULL)
 		{
 			cout << "Khong co sach voi ten vua nhap." << endl;
 			cout << "Tiep tuc tim sach." << endl;
@@ -31,7 +34,7 @@ void Guest::timSach(ListBook& l)
 		else break;
 	} while (true);
 	
-	cout << a << endl;;
+	cout << *a << endl;;
 }
 
 

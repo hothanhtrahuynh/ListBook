@@ -1,5 +1,4 @@
-﻿#include"NXB.h"
-#include"TacGia.h"
+﻿#include"Header.h"
 //int main()
 //{
 //	DS_HoaDon ds;
@@ -111,7 +110,7 @@ int main()
 	ListBook l;
 	l.loadfromFile();
 	l.xuatDanhSachSach();
-	
+
 	/*NXB nxb1;
 	string tenNXB = "KH&KT";
 	string pass = "123";
@@ -136,15 +135,17 @@ int main()
 	nxb1.funRundeleBook();
 	nxb1.printNXBListBook();
 	l.xuatDanhSachSach();*/
-	
-	TacGia tg;
-	tg.setPassUser("123");
-	tg.setTenUser("TranDanThu");
+
+	/*TacGia tg;
+	tg.setPassAccount("123");
+	tg.setUsernameAccount("Tran Dan Thu");
 	do
 	{
 		string mk;
-		cout << "Nhap mat khau: "; cin >> mk;
-		if (mk == tg.getPassUser()) {
+
+		cout << "Nhap mat khau: ";
+		getline(cin , mk);
+		if (mk == tg.getPassAccount()) {
 			cout << "dang nhap thanh cong" << endl; break;
 		}
 		else { cout << "Sai Mat khau. Can dang nhap lai. " << endl; }
@@ -159,6 +160,8 @@ int main()
 
 	tg.funRundeleBook();
 	tg.printTacGiaListBook();
-	l.xuatDanhSachSach(); 
+	l.xuatDanhSachSach(); */
+	int lenh=0;
+	funRun(l);
 
 }

@@ -1,5 +1,5 @@
 ﻿#include "ListBook.h"
-#include<vector>
+
 void ListBook::taoDanhSachSach()
 {
 	cout << "KHOI TAO DANH SACH SACH" << endl;
@@ -194,7 +194,21 @@ void ListBook::xoaSach()
 	cin >> ms;
 	int pos = 0;
 	pos = timSachTheoMaSach(ms);
+	if (pos = -1)
+	{
+		cout << "Sach can xoa khong ton tai." << endl; return;
+	}
 	lb.erase(lb.begin()+pos);
+}
+
+int ListBook::checkExistBook(Sach& a)
+{
+	vector<Sach>::iterator it;
+	for (it = lb.begin(); it != lb.end(); ++it)
+	{
+		if (a.getTenSach() == (it)->getTenSach()&&a.getNXB()==it->getNXB()&&a.getTacGia()==it->getTacGia()) return 1;
+	}
+	return 0;
 }
 
 int ListBook::timSachTheoMaSach(int a)
@@ -213,16 +227,16 @@ int ListBook::loadfromFile()
 {
 	ifstream f("ListBookData.txt");
 	if (f.fail()) { cout << "Khong mo duoc file." << endl; return -1; }
-	//char a[256];
-	//f.getline(a, 255);
-	//while (!f.eof())
-	//{
-	//	Sach temp;
-	//	f.getline(a, 255);//lấy ra từng dòng
-	//	temp.filetoSach(a);
-	//	this->lb.push_back(temp);
-	//}
-	int dem = 0;
+	char a[256];
+	f.getline(a, 255);
+	while (!f.eof())
+	{
+		Sach temp;
+		f.getline(a, 255);//lấy ra từng dòng
+		temp.filetoSach(a);
+		this->lb.push_back(temp);
+	}
+	/*int dem = 0;
 	while (!f.eof())
 	{
 		dem++;
@@ -237,5 +251,13 @@ int ListBook::loadfromFile()
 		temp.setNXB(tenNXB);
 		temp.setGia(gia);
 		this->lb.push_back(temp);
-	}
+	}*/
+}
+
+//thêm sách vào trong list sách.
+void ListBook::themSach()
+{
+	Sach temp;
+	temp.Nhap();
+	lb.push_back(temp);
 }

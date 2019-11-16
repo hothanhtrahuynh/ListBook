@@ -123,8 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="DS_HoaDon.cpp" />
     <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="Header.cpp" />
     <ClCompile Include="HoaDon.cpp" />
     <ClCompile Include="ListBook.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -135,6 +138,8 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="DS_HoaDon.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Header.h" />

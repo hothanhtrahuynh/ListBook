@@ -1,5 +1,12 @@
 ﻿#include "DS_HoaDon.h"
 
+bool DS_HoaDon::checkEmpty()
+{
+	if(dshd.empty())
+	return true;
+	return false;
+}
+
 void DS_HoaDon::themHoaDon(ListBook& a)
 {
 	HoaDon b;

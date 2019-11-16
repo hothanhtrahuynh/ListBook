@@ -1,19 +1,19 @@
 ﻿#ifndef _NXB_H_
 #define _NXB_H_
-#include<iostream>
-#include<vector>
-#include"User.h"
-#include"ListBook.h"
-using namespace std;
 
-class NXB:public User
+#include"Account.h"
+
+class NXB:public Account
 {
 private:
 	vector <Sach*> dsSach;
 public:
 	NXB();
+	NXB(string ten, string pass) {
+		mTen = ten; mPass = pass;
+	}
 	~NXB();
-	void addBook();
+	void addBook(Sach* a);
 	//thêm sách mới vào danh sách của NXB
 
 	void getData(ListBook& l);
@@ -25,7 +25,7 @@ public:
 	Sach* findSachfromNXBList(string tensach);
 	//timf và trả về con trỏ trỏ đến Sách có tên đưuọc truyền vào trong số sach của NXB
 
-	int updatePrice(string tenSach,float gia);
+	int updatePrice(string tenSach);
 	//cập nhật lại giá sách
 
 	void funRunUpdatePrice();
@@ -36,6 +36,10 @@ public:
 
 	void funRundeleBook();
 	//hàm run cho hàm deleBook...
+	//in menu cho NXB
+	int printMenu();
+
+	virtual void funRunMenu(ListBook& lb);
 };
 
 #endif 

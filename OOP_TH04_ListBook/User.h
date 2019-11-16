@@ -1,26 +1,32 @@
 #ifndef _USER_H_
 #define _USER_H_
-#include"Guest.h"
-
-class User:public Guest
+#include"Account.h"
+#include"DS_HoaDon.h"
+class User :public Account
 {
 private:
 	int mTuoi;
 	DS_HoaDon hd_user;
-protected:
-	string mTen;
-	string mPass;
+
 public:
 	User();
-	~User();
-	void setTenUser(string ten);
+	User(string ten, string matkhau)
+	{
+		mTen = ten;
+		mPass = matkhau;
+		nameclass = "User";
+	}
+	~User() {};
+	
 	void setTuoiUser(int t);
-	void setPassUser(string pass);
-	string getTenUser();
 	int getTuoiUser();
-	string getPassUser();
 	DS_HoaDon muaSach(ListBook& l);
-	void upDateHoaDon(DS_HoaDon& a);
+	void upDateHoaDon();
+	void xoaHoaDon_DSHD();
+
+	DS_HoaDon getDanhSachHoaDon();
+	int printMenu();
+	void funRunMenu(ListBook& lb);
 };
 
 

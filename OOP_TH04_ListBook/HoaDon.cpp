@@ -14,9 +14,10 @@ HoaDon::~HoaDon()
 int HoaDon::taoHoaDon(ListBook& a)
 {
 	int n;
+	cin.ignore();
 	string name;
 	cout << "Nhap vao ten sach can tao hoa don: ";
-	cin >> name;//tên sách cần tìm
+	getline(cin,name);//tên sách cần tìm
 	Sach temp,b(*a.timSach_Ten(name));;//tìm sách trong DS sách với tên đã nhập rồi gán cho biến b
 	if (temp.getGiaSach() == b.getGiaSach())
 	{
@@ -32,7 +33,7 @@ int HoaDon::taoHoaDon(ListBook& a)
 
 void HoaDon::xuatHoaDon()
 {
-	cout << "Ten sach: " << sach.getTenSach() << " : " << sl << "*" << tongTien / sl << " = " << tongTien << endl;
+	cout << sach.getTenSach() << " : " << sl << "*" << tongTien / sl << " = " << tongTien << endl;
 }
 
 void HoaDon::setSoLuongSach(int n)
