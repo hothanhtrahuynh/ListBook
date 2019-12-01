@@ -14,7 +14,8 @@ void DS_HoaDon::themHoaDon(ListBook& a)
 	//thêm sach vào hóa đơn-->tạo hóa đơn
 	b.taoHoaDon(a);
 	//thêm hóa đơn vào ds hóa đơn
-	this->dshd.push_back(b);
+	if (b.getSoLuong() == -1) return;
+		this->dshd.push_back(b);
 
 }
 
@@ -63,5 +64,28 @@ int DS_HoaDon::tongTienHoaDon()
 		tong += dshd[i].getTienHoaDon();
 	}
 	return tong;
+}
+
+int DS_HoaDon::fwriteToFile(fstream& f)
+{
+	for (int i = 0; i < dshd.size(); i++)
+	{
+		f.write(reinterpret_cast<const char*>(&dshd[i]), sizeof(HoaDon));
+	}
+	
+	return 1;
+}
+
+int DS_HoaDon::freadFromFile(fstream& f)
+{
+	while (!f.eof())
+	{
+		HoaDon* temp = new HoaDon;
+		f.read(reinterpret_cast<char*>(temp), sizeof(HoaDon));
+		if(temp->getSachTrongHoaDon().getGiaSach()!=-1)
+			this->dshd.push_back(*temp);
+	}
+	
+	return 1;
 }
 

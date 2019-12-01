@@ -29,7 +29,7 @@ public:
 	int loadfromFile();
 
 	//ghi lại các thao tác --> danh sách cuối cùng vào file.
-	int printToFile();
+	void writeDownToFile();
 	void themSach();
 
 };

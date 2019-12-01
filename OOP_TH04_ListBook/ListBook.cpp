@@ -54,6 +54,7 @@ int ListBook::timSachTheoTen(string& name)
 		{
 			return i;
 		}
+		i++;
 	}
 	return -1;
 }
@@ -189,16 +190,18 @@ void ListBook::capNhatGiaSach()
 
 void ListBook::xoaSach()
 {
-	int ms;
+	string tensach;
+	cin.ignore();
 	cout << "Ma sach can xoa la: ";
-	cin >> ms;
+	getline(cin, tensach);
 	int pos = 0;
-	pos = timSachTheoMaSach(ms);
-	if (pos = -1)
+	pos = timSachTheoTen(tensach);
+	if (pos == -1)
 	{
 		cout << "Sach can xoa khong ton tai." << endl; return;
 	}
 	lb.erase(lb.begin()+pos);
+	cout << "Ban da xoa thanh con sach " << tensach << " ." << endl;
 }
 
 int ListBook::checkExistBook(Sach& a)
@@ -228,13 +231,14 @@ int ListBook::loadfromFile()
 	ifstream f("ListBookData.txt");
 	if (f.fail()) { cout << "Khong mo duoc file." << endl; return -1; }
 	char a[256];
-	f.getline(a, 255);
+	//f.getline(a, 255);
 	while (!f.eof())
 	{
 		Sach temp;
 		f.getline(a, 255);//lấy ra từng dòng
 		temp.filetoSach(a);
-		this->lb.push_back(temp);
+		if(temp.getGiaSach()!=-1)
+			this->lb.push_back(temp);
 	}
 	/*int dem = 0;
 	while (!f.eof())
@@ -252,6 +256,21 @@ int ListBook::loadfromFile()
 		temp.setGia(gia);
 		this->lb.push_back(temp);
 	}*/
+	f.close();
+}
+
+void ListBook::writeDownToFile()
+{
+	fstream f("ListBookData.txt", ios::out);
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file de ghi list sach." << endl;
+		return;
+	}
+	for (int i = 0; i < this->lb.size(); i++)
+	{
+		f << lb[i].getMaSach() << "\t" << lb[i].getTenSach() << "\t" << lb[i].getTacGia() << "\t" << lb[i].getNXB() << "\t" << lb[i].getGiaSach() << "\n";
+	}
 }
 
 //thêm sách vào trong list sách.

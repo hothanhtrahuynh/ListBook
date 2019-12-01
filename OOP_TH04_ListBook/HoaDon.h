@@ -10,6 +10,7 @@ private:
 	int sl;
 public:
 	HoaDon();
+	HoaDon(const HoaDon& hd);
 	~HoaDon();
 	int taoHoaDon(ListBook& a);
 	void xuatHoaDon();
@@ -17,6 +18,8 @@ public:
 	void setSoLuongSach(int n);
 	Sach getSachTrongHoaDon();
 	int getTienHoaDon();
+	int getSoLuong();
+	
 };
 
 #endif

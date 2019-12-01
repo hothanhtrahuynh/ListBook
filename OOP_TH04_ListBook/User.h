@@ -1,3 +1,4 @@
+
 #ifndef _USER_H_
 #define _USER_H_
 #include"Account.h"
@@ -10,11 +11,16 @@ private:
 
 public:
 	User();
+	User(string ten, string matkhau,int tuoi)
+	{
+		mTen = ten;
+		mPass = matkhau;
+		this->mTuoi = tuoi;
+	}
 	User(string ten, string matkhau)
 	{
 		mTen = ten;
 		mPass = matkhau;
-		nameclass = "User";
 	}
 	~User() {};
 	
@@ -27,6 +33,9 @@ public:
 	DS_HoaDon getDanhSachHoaDon();
 	int printMenu();
 	void funRunMenu(ListBook& lb);
+	string nameclass();
+	void fwriteToFile();
+	void freadFromFile();
 };
 
 

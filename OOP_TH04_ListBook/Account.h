@@ -24,7 +24,7 @@
 class Account
 {
 protected:
-	string mTen, mPass,nameclass;
+	string mTen, mPass;
 	bool logned;
 public:
 	Account() {
@@ -38,6 +38,7 @@ public:
 	string getPassAccount();
 	void setTypeofLognIn(bool a);
 	virtual void funRunMenu(ListBook& lb)=0;
+	virtual string nameclass() = 0;
 	void print();
 };
 #endif

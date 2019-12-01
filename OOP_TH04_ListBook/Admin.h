@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _ADMIN_H_
 #define _ADMIN_H
@@ -20,10 +20,17 @@ public:
 	}
 	~Admin();
 	int addAccount();
+
+	//Đọc từ file lên danh sách tài khoản
 	int getData();
+
+	//in danh sách tài khoản đã cập nhật vào file
+	void writeDownAccountToFile();
+
 
 	int printMenu();
 	virtual void funRunMenu(ListBook& lb) ;
+	virtual string nameclass();
 	
 	void khoaTacGia(ListBook& lb);
 	void khoaNXB(ListBook& lb);

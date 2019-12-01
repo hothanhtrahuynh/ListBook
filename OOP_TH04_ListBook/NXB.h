@@ -40,6 +40,7 @@ public:
 	int printMenu();
 
 	virtual void funRunMenu(ListBook& lb);
+	virtual string nameclass();
 };
 
 #endif 

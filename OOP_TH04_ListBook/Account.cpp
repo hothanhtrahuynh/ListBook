@@ -9,23 +9,23 @@ void Account::getAccount()
 	cout << "Nhap vao ten tai khoan: ";
 	getline(cin, mTen);
 	cout << "Nhap vao mat khau:";
-	string mk;
-	getline(cin, mk);
+	getline(cin, mPass);
 	do
 	{
 		string pascmp;
 		cin.ignore();
 		cout << "Xac nhan mat khau: ";
 		getline(cin, pascmp);
-		if (pascmp == mk)
+		if (pascmp == mPass)
 		{
-			mPass = mk;
+			break;
 		}
 		else
 		{
-			cout << "Xac nhan matkhau sai. Nhap lai." << endl;
+			cout << "Xac nhan mat khau sai. Nhap lai." << endl;
 		}
 	} while (true);
+	
 }
 
 void Account::setUsernameAccount(string ten)
@@ -57,6 +57,6 @@ void Account::setTypeofLognIn(bool a)
 
 void Account::print()
 {
-	cout << nameclass << " " << mTen << " " << mPass;
+	cout << "" << " " << mTen << " " << mPass;
 }
 

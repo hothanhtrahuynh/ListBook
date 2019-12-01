@@ -13,6 +13,8 @@ public:
 	void xoaHoaDon();
 	void upDateHoaDonThu(int pos, int soLuongMoi);
 	int tongTienHoaDon();
+	int fwriteToFile(fstream& f);
+	int freadFromFile(fstream& f);
 };
 
 #endif

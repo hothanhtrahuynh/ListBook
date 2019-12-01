@@ -4,6 +4,14 @@
 
 HoaDon::HoaDon()
 {
+	this->sl = -1;
+}
+
+HoaDon::HoaDon(const HoaDon& hd)
+{
+	this->sach = hd.sach;
+	this->sl = hd.sl;
+	this->tongTien = hd.tongTien;
 }
 
 
@@ -45,12 +53,17 @@ void HoaDon::setSoLuongSach(int n)
 
 Sach HoaDon::getSachTrongHoaDon()
 {
-	return Sach(sach);
+	return sach;
 }
 
 int HoaDon::getTienHoaDon()
 {
 	return tongTien;
+}
+
+int HoaDon::getSoLuong()
+{
+	return sl;
 }
 
 ostream& operator<<(ostream& out, HoaDon& b)

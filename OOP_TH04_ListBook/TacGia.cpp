@@ -4,7 +4,6 @@ TacGia::TacGia()
 {
 	mTen = "";
 	mPass = "";
-	nameclass = "Tac Gia";
 }
 
 TacGia::TacGia(string ten, string pass)
@@ -161,7 +160,7 @@ void TacGia::funRunMenu(ListBook& lb)
 		case 1:
 		{
 			printTacGiaListBook();
-			
+			cout << endl;
 		}break;
 		case 2:
 		{
@@ -173,14 +172,17 @@ void TacGia::funRunMenu(ListBook& lb)
 				cout << "Vui long thu lai." << endl;
 			}
 			addBook(temp);
+			cout << endl;
 		}break;
 		case 3:
 		{
 			funRunUpdateNameBook();
+			cout << endl;
 		}break;
 		case 4:
 		{
 			funRundeleBook();
+			cout << endl;
 		}break;
 		default:
 			lenh = 0;
@@ -189,4 +191,9 @@ void TacGia::funRunMenu(ListBook& lb)
 		}
 
 	} while (lenh!=0);
+}
+
+string TacGia::nameclass()
+{
+	return "Tac Gia";
 }

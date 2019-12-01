@@ -1,4 +1,5 @@
 ﻿#include "Header.h"
+#include<conio.h>
 
 int printMenu()
 {
@@ -7,6 +8,7 @@ int printMenu()
 	cout << "1.Dang nhap." << endl;
 	cout << "2.  Xem sach." << endl;
 	cout << "3. Tim sach" << endl;
+	cout << "4. Dang ky tai khoan." << endl;
 	cout << "0. Thoat." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
@@ -39,6 +41,7 @@ string lognIn(string& ten, string& matkhau)
 		char c[5] = "\t";
 		char* p = NULL;
 		p = strtok(a, c);
+		if (p == NULL) continue;
 		string type (p);
 		string username, pass;
 		for (int i = 0; i <= 1; i++)
@@ -74,6 +77,7 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 	int lenh;
 	do
 	{
+		system("cls");
 		lenh = printMenu();
 		switch (lenh)
 		{
@@ -87,13 +91,13 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 				if (type=="")
 				{
 					cout << "Dang nhap khong thanh cong." << endl;
-					/*int choice;
+					int choice;
 					cout << "Tiep tuc(1) - Ngung (0) "; cin >> choice;
-						if (lenh == 0)
+						if (choice == 0)
 						{
 							cout << "Cam on quy khach da su dung dich vu" << endl;
-							
-						}*/
+							break;
+						}
 				}
 			} while (type==""); 
 			cout << "Dang nhap thanh cong." << endl;
@@ -143,13 +147,41 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 			Guest guest;
 			guest.timSach(lb);
 		}break;
+		case 4:
+		{
+			string ten, pass;
+			int tuoi;
+			cin.ignore();
+			cout << "Ten dang nhap: "; getline(cin, ten);
+			cout << "Mat khau: "; getline(cin, pass);
+
+			Account* new_user=new User(ten, pass);
+			writeDownNewAccount(new_user);
+
+			cout <<endl<< "Dang ki thanh cong." << endl;
+			//ghi tai khoan nay vao file.
+		}break;
 		default:
 			lenh = 0;
 			break;
 		}
-
+		_getch();
 	} while (lenh!=0);
 
-	// lưu danh sách sách mói vào file
+	// lưu danh sách sách mói vàgo file
+
 	//lưu danh sách tài khoản trở lại file.
+}
+
+void writeDownNewAccount(Account* p)
+{
+	fstream f("Account.txt",ios::app);
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file" << endl;
+		return;
+	}
+	
+	f << p->nameclass() << "\t" << p->getUsernameAccount() << "\t" << p->getPassAccount();
+	
 }

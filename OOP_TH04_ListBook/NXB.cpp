@@ -3,7 +3,6 @@ NXB::NXB()
 {
 	mTen = "";
 	this->mPass = "";
-	nameclass = "NXB";
 }
 
 NXB::~NXB()
@@ -145,7 +144,7 @@ void NXB::funRunMenu(ListBook& lb)
 		case 1:
 		{
 			printNXBListBook();
-
+			cout << endl;
 		}break;
 		case 2:
 		{
@@ -156,22 +155,31 @@ void NXB::funRunMenu(ListBook& lb)
 				cout << "Sach vua nhap da ton tai trong he thong." << endl;
 				cout << "Vui long thu lai." << endl;
 			}
+			cout << endl;
 		}break;
 		case 3:
 		{
 			funRunUpdatePrice();
+			cout << endl;
 		}break;
 		case 4:
 		{
 			funRundeleBook();
+			cout << endl;
 		}break;
 		default:
 			lenh = 0;
 			cout << "Cam on ban da su dung sich vu vua chung toi." << endl;
 			break;
+			cout << endl;
 		}
 
 	} while (lenh!=0);
+}
+
+string NXB::nameclass()
+{
+	return "NXB";
 }
 
 

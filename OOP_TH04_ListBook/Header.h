@@ -17,6 +17,6 @@ int printMenu();
 void getAccount(string& ten, string& pass);
 string lognIn(string &ten, string& pass);
 void funRun(ListBook& lb);
-
+void writeDownNewAccount(Account* p);
 
 #endif

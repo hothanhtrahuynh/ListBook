@@ -11,6 +11,7 @@ Sach::Sach()
 	tacGia = "noname";
 	NXB = "noname";
 	anTacGia = anNXB = false;
+	sl_Daban = 0;
 }
 
 Sach::Sach(string a, int b, float c)
@@ -19,6 +20,7 @@ Sach::Sach(string a, int b, float c)
 	masach = b;
 	gia = c;
 	anTacGia = anNXB = false;
+	sl_Daban = 0;
 }
 
 
@@ -28,9 +30,10 @@ Sach::Sach(const Sach& a)
 	masach = a.masach;
 	gia = a.gia;
 	tacGia = a.tacGia;
-	NXB = a.NXB;
-	anTacGia = a.anNXB;
+	this->NXB = a.NXB;
+	anTacGia = a.anTacGia;
 	anNXB = a.anNXB;
+	sl_Daban = a.sl_Daban;
 }
 
 void Sach::setGia(float a)
@@ -68,6 +71,11 @@ void Sach::setAnNXB(bool a)
 	anNXB = a;
 }
 
+void Sach::setSLDaban(int sl)
+{
+	sl_Daban += sl;
+}
+
 int Sach::getMaSach()
 {
 	return masach;
@@ -101,6 +109,11 @@ bool Sach::getAnTacGia()
 bool Sach::getAnNXB()
 {
 	return anNXB;
+}
+
+int Sach::getSLDaban()
+{
+	return sl_Daban;
 }
 
 Sach* Sach::getBook()
@@ -170,6 +183,12 @@ void Sach::filetoSach(char *a)
 				float gia = float(atof(p));
 				setGia(gia);
 			}break;
+			case 4:
+			{
+				int sl;
+				sl = atoi(p);
+				this->sl_Daban = sl;
+			}break;
 		}
 	}
 
@@ -206,7 +225,7 @@ ostream& operator<<(ostream& ODev, Sach& a)
 	ODev << a.tensach << "	";
 	cout << a.tacGia << "	";
 	cout << a.NXB << "	";
-	cout << a.gia;
+	cout << a.gia << "	" << a.getSLDaban();
 	return ODev;
 	// TODO: insert return statement here
 }

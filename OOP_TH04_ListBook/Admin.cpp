@@ -4,7 +4,7 @@
 
 Admin::Admin()
 {
-	nameclass = "Admin";
+
 }
 
 
@@ -61,6 +61,7 @@ int Admin::getData()
 		char c[5] = "\t";
 		char* p = NULL;
 		p = strtok(a, c);
+		if (p == NULL) continue;
 		string type(p);
 		string username, pass;
 		for (int i = 0; i <= 1; i++)
@@ -115,6 +116,21 @@ int Admin::getData()
 	return 1;
 }
 
+void Admin::writeDownAccountToFile()
+{
+	fstream f("Account.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file account." << endl;
+		return;
+	}
+	for (int i = 0; i < dstk.size(); i++)
+	{
+		f << dstk[i]->nameclass() << "\t" << dstk[i]->getUsernameAccount() << "\t" << dstk[i]->getPassAccount() << "\n";
+	}
+	f.close();
+}
+
 int Admin::printMenu()
 {
 	int lenh;
@@ -146,30 +162,35 @@ void Admin::funRunMenu(ListBook& lb)
 			case 1:
 			{
 				addAccount();
+				cout << endl;
 			}break;
 			//thêm sách vào trong danh sách sách.
 			case 2:
 			{
 				lb.themSach();
-
+				cout << endl;
 			}break;
 			//khóa quyền chỉnh sửa của tác giả
 			case 3:
 			{
 				khoaTacGia(lb);
+				cout << endl;
 			}break;
 			//khóa quyền chỉnh sửa của nhà xuất bản
 			case 4:
 			{
 				khoaNXB(lb);
+				cout << endl;
 			}break;
 			case 5:
 			{
 				xemDanhSachTaiKhoan();
+				cout << endl;
 			}break;
 			case 6:
 			{
 				lb.xuatDanhSachSach();
+				cout << endl;
 			}break;
 			case 7:
 			{
@@ -178,16 +199,26 @@ void Admin::funRunMenu(ListBook& lb)
 					cout << "Tai khoan ban vua nhap chua chinh xac." << endl;
 				}
 				else cout << "Xoa thanh cong." << endl;
+				cout << endl;
 			}break;
 			case 8:
 			{
 				lb.xoaSach();
+				cout << endl;
 			}break;
 		default:
 			lenh = 0;
 			break;
 		}
 	} while (lenh!=0);
+
+	writeDownAccountToFile();
+
+}
+
+string Admin::nameclass()
+{
+	return "Admin";
 }
 
 void Admin::khoaTacGia(ListBook& lb)
@@ -231,22 +262,26 @@ void Admin::xemDanhSachTaiKhoan()
 		(*it)->print();
 		cout << endl;
 	}
+	cout << endl;
 }
 
 int Admin::xoaTaiKhoan()
 {
 	string username, pass;
+	cin.ignore();
 	cout << "Nhap vao ten tai khoan muon xoa: " ;
-	cin >> username;
-	cout << "Nhpa vao mat khau tai khoan muon xoa: ";
-	cin >> pass;
+	getline(cin, username);
+	cout << "Nhap vao mat khau tai khoan muon xoa: ";
+	getline(cin, pass);
 
 	vector<Account*>::iterator it;
 	for (it=dstk.begin();it!=dstk.end();++it)
 	{
 		if ((*it)->getPassAccount() == pass && (*it)->getUsernameAccount() == username)
 		{
-			dstk.erase(it); return 1;
+			dstk.erase(it); 
+			cout << "Xoa tai khoan " << username << " thanh cong." << endl;
+			return 1;
 		}
 	}
 	return 0;

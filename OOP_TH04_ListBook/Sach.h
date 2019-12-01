@@ -14,11 +14,11 @@ private:
 	float gia;
 	//thêm thuộc tính ẩn
 	bool anTacGia, anNXB;
+	int sl_Daban;
 public:
 	Sach();
 	Sach(string, int, float);
 	Sach(const Sach& a);
-
 	void setGia(float);
 	void setMaSach(int);
 	void setTenSach(string);
@@ -26,7 +26,7 @@ public:
 	void setNXB(string);
 	void setAnTacGia(bool a);
 	void setAnNXB(bool a);
-
+	void setSLDaban(int sl);
 
 	int getMaSach();
 	string getTenSach();
@@ -35,6 +35,7 @@ public:
 	string getNXB();
 	bool getAnTacGia();
 	bool getAnNXB();
+	int getSLDaban();
 
 	Sach* getBook();
 	void Nhap();
