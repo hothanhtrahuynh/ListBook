@@ -154,6 +154,20 @@ void Sach::Xuat()
 	// TODO: insert return statement here
 }*/
 
+Sach& Sach::operator=(Sach a)
+{
+	this->tensach = a.tensach;
+	masach = a.masach;
+	NXB = a.NXB;
+	tacGia = a.tacGia;
+	gia = a.gia;
+	anTacGia = a.anTacGia;
+	anNXB = a.anNXB;
+	sl_Daban = a.sl_Daban;
+	return *this;
+	// TODO: insert return statement here
+}
+
 void Sach::filetoSach(char *a)
 {
 	
@@ -164,9 +178,10 @@ void Sach::filetoSach(char *a)
 	int ms;
 	ms = atoi(p);
 	setMaSach(ms);
-	for (int i = 0; i <= 3; i++)
+	for (int i = 0; i <= 8; i++)
 	{
 		p = strtok(NULL, c);
+		if (p == NULL) continue;
 		switch (i)
 		{
 			case 0://set tên Sách
@@ -189,18 +204,24 @@ void Sach::filetoSach(char *a)
 				sl = atoi(p);
 				this->sl_Daban = sl;
 			}break;
+			case 5:
+			{
+				anTacGia = atoi(p);
+			}break;
+			case 6:
+			{
+				anNXB = atoi(p);
+			}break;
+			
 		}
 	}
 
 }
 
 
-
 Sach::~Sach()
 {
-	gia = 0;
-	masach = -1;
-	tensach = "\0";
+
 }
 
 istream& operator>>(istream& IDev, Sach& a)

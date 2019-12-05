@@ -43,8 +43,9 @@ public:
 	//Sach& operator=(Sach& a);
 	friend istream& operator>>(istream& IDev, Sach& a);
 	friend ostream& operator<<(ostream& ODev, Sach& a);
-
+	Sach& operator=(Sach a);
 	void filetoSach(char *a);
+	void sachToFile(fstream& f);
 	~Sach();
 };
 #endif

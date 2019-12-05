@@ -1,0 +1,51 @@
+HUONG DAN SU DUNG
+=================
+- Neu ban da co tai khoan thi chon DANG NHAP de thuc hien cac thaot ac ke tiep.4
+- Neu chua co tao khoan thi ban co the chon TAO TAI KHOAN de co the dang nhap va thuc hien cac thao tac khac.
+- Doi voi nguoi dung chua co tai khoan thi chi co the xem sach hien co tren he thong.
+- Neu muon mua sach thi buoc quy khach phair co 1 tai khoan de dang nhap.
+=================
+1.Dang nhap:
+Sau khi chon --> Nhap ten tai khoan --> Nhap mat khau
+Sau khi dang nhap thanh cong thi quy khach co the thuc hien bang cach chon lenh tuong ung dung truoc ten cac chuc nang nhu:
+--------------------
+*Doi voi User:
+1. Mua sach.
+2. Xem danh sach hoa don
+3. Cap nhat so luong moi cho hoa don.
+4. Xoa hoa don
+5. Gui tin nhan (Chi duoc gui tin nhan cho cac User khac)
+6. Xam cac muc uu dai.
+--------------------
+*Doi voi Nha Xuat Ban:
+1. Xem danh sach sach.
+2. Them sach vao danh sach. 
+3. Cap nhat lai gia sach.
+4. Xoa sach.
+5. Gui tin nhan.(Chi gui duoc tin nhan cho cac NXB khac)
+--------------------
+*Doi voi Tac Gia:
+1. Xem danh sach sach.
+2. Them sach vao danh sach. 
+3. Cap nhat lai ten sach.
+4. Xoa sach.
+5. Gui tin nhan.(chi gui duoc tin nhan cho cac Tac Gia khac)
+--------------------
+*Doi voi Admin
+1. Them tai khoan.
+2. Them sach.
+3. Khoa quyen tac gia.
+4. Khoa quyen nha xuat ban.
+5. Xem danh sach tai khoan.
+6. Xem danh sach sach.
+7. Xoa tai khoan.
+8. Xoa sach.
+9. Gui tin nhan.
+	1. Gui dong loat cho USER.
+	2. Gui dong loat cho Tac Gia.
+	3. Gui dong loat cho NXB.
+	4. Gui dong loat cho tat ca tai khoan.
+	5. Gui cho mot tai khoan cu the
+10. Thong ke.
+--------------------
+DE THUC HIEN DUOC CAC CHUC NANG CHI NHAP MA LENH TUONG UNG.

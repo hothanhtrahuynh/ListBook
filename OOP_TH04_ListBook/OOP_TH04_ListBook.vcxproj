@@ -126,29 +126,39 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="DS_HoaDon.cpp" />
+    <ClCompile Include="DS_UuDai.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Header.cpp" />
     <ClCompile Include="HoaDon.cpp" />
     <ClCompile Include="ListBook.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Message.cpp" />
     <ClCompile Include="NXB.cpp" />
     <ClCompile Include="Sach.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TacGia.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="UuDai.cpp" />
+    <ClCompile Include="UuDai_Sach.cpp" />
+    <ClCompile Include="UuDai_Tuoi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="DS_HoaDon.h" />
+    <ClInclude Include="DS_UuDai.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="HoaDon.h" />
     <ClInclude Include="ListBook.h" />
+    <ClInclude Include="Message.h" />
     <ClInclude Include="NXB.h" />
     <ClInclude Include="Sach.h" />
     <ClInclude Include="TacGia.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="UuDai.h" />
+    <ClInclude Include="UuDai_Sach.h" />
+    <ClInclude Include="UuDai_Tuoi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

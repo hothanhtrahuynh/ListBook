@@ -17,12 +17,13 @@ public:
 	int timSachTheoTacGia(string&);
 	void capNhatGiaSach();
 	void xoaSach();
-	Sach* timSach_Ten(string& name);
+	Sach* timSach_Ten(string name);
 	Sach** timSach(string searchstring, int type);
 
 	//dem so luong sach thuoc loai type duoc truyen vao
 	int demSach(string nxb,int type);
 	
+	int soSachDaban();
 
 	int checkExistBook(Sach& a);
 	int timSachTheoMaSach(int);

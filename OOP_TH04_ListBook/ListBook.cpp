@@ -67,7 +67,7 @@ int ListBook::timSachTheoTacGia(string& tg)
 	}
 	return -1;
 }
-Sach* ListBook::timSach_Ten(string& name)
+Sach* ListBook::timSach_Ten(string name)
 {
 	
 	int i = 0;
@@ -157,6 +157,16 @@ int ListBook::demSach(string searchstring,int type)
 	
 }
 
+int ListBook::soSachDaban()
+{
+	int tong = 0;
+	for (int i = 0; i < lb.size(); i++)
+	{
+		tong+=lb[i].getSLDaban();
+	}
+	return tong;
+}
+
 
 
 void ListBook::capNhatGiaSach()
@@ -201,7 +211,7 @@ void ListBook::xoaSach()
 		cout << "Sach can xoa khong ton tai." << endl; return;
 	}
 	lb.erase(lb.begin()+pos);
-	cout << "Ban da xoa thanh con sach " << tensach << " ." << endl;
+	cout << "Ban da xoa thanh cong sach " << tensach << " ." << endl;
 }
 
 int ListBook::checkExistBook(Sach& a)
@@ -269,7 +279,7 @@ void ListBook::writeDownToFile()
 	}
 	for (int i = 0; i < this->lb.size(); i++)
 	{
-		f << lb[i].getMaSach() << "\t" << lb[i].getTenSach() << "\t" << lb[i].getTacGia() << "\t" << lb[i].getNXB() << "\t" << lb[i].getGiaSach() << "\n";
+		f << lb[i].getMaSach() << "\t" << lb[i].getTenSach() << "\t" << lb[i].getTacGia() << "\t" << lb[i].getNXB() << "\t" << lb[i].getGiaSach()<<"\t"<<lb[i].getSLDaban()<<"\t"<<lb[i].getAnTacGia()<<"\t"<<lb[i].getAnNXB() << "\n";
 	}
 }
 

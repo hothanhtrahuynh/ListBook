@@ -11,6 +11,11 @@ private:
 public:
 	HoaDon();
 	HoaDon(const HoaDon& hd);
+	HoaDon(Sach& a, int sl, int tien) {
+		sach = a;
+		this->sl = sl;
+		tongTien = tien;
+	}
 	~HoaDon();
 	int taoHoaDon(ListBook& a);
 	void xuatHoaDon();

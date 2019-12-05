@@ -9,7 +9,7 @@ HoaDon::HoaDon()
 
 HoaDon::HoaDon(const HoaDon& hd)
 {
-	this->sach = hd.sach;
+	sach = hd.sach;
 	this->sl = hd.sl;
 	this->tongTien = hd.tongTien;
 }
@@ -26,16 +26,17 @@ int HoaDon::taoHoaDon(ListBook& a)
 	string name;
 	cout << "Nhap vao ten sach can tao hoa don: ";
 	getline(cin,name);//tên sách cần tìm
-	Sach temp,b(*a.timSach_Ten(name));;//tìm sách trong DS sách với tên đã nhập rồi gán cho biến b
-	if (temp.getGiaSach() == b.getGiaSach())
+	Sach temp,*b=a.timSach_Ten(name);//tìm sách trong DS sách với tên đã nhập rồi gán cho biến b
+	if (temp.getGiaSach() == b->getGiaSach())
 	{
 		cout << "Sach vua nhap khong co trong danh sach" << endl;
 		return-1;
 	}
-	this->sach = b;
+	this->sach = *b;
 	cout << "Nhap vao so luong sach: "; cin >> n;
 	this->sl = n;
-	this->tongTien = n *b.getGiaSach();
+	b->setSLDaban(n);
+	this->tongTien = n *b->getGiaSach();
 	return 1;
 }
 

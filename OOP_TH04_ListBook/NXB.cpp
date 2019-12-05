@@ -1,4 +1,5 @@
-﻿#include"NXB.h"
+﻿
+#include"NXB.h"
 NXB::NXB()
 {
 	mTen = "";
@@ -126,13 +127,14 @@ int NXB::printMenu()
 	cout << "2. Them sach vao danh sach. " << endl; //(indivitual list book)
 	cout << "3. Cap nhat lai gia sach." << endl;
 	cout << "4. Xoa sach." << endl;
+	cout << "5. Gui tin nhan." << endl;
 	cout << "0. Dang xuat (Thoat)." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
 	return lenh;
 }
 
-void NXB::funRunMenu(ListBook& lb)
+void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 {
 	getData(lb);
 	int lenh;
@@ -167,6 +169,10 @@ void NXB::funRunMenu(ListBook& lb)
 			funRundeleBook();
 			cout << endl;
 		}break;
+		case 5:
+		{
+			sendMessage();
+		}break;
 		default:
 			lenh = 0;
 			cout << "Cam on ban da su dung sich vu vua chung toi." << endl;
@@ -180,6 +186,67 @@ void NXB::funRunMenu(ListBook& lb)
 string NXB::nameclass()
 {
 	return "NXB";
+}
+
+void NXB::sendMessage()
+{
+	string name_user, text;
+	getInfor_Message(name_user, text);
+	if (checkExistAccount(name_user) == 0)
+	{
+		cout << "Khong tim thay tai khoan nao voi ten vua nhap." << endl;
+		cout << "Vui long thu lai." << endl;
+		return;
+	}
+	fwriteMessage(name_user, text);
+}
+
+int NXB::checkExistAccount(string name_account)
+{
+	fstream f("Account.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file account." << endl;
+		return -1;
+	}
+	char a[256];
+
+	while (!f.eof())
+	{
+
+		f.getline(a, 255);
+		char c[5] = "\t";
+		char* p = NULL;
+		p = strtok(a, c);
+		if (p == NULL) continue;
+		string type(p);
+		string username, pass;
+		for (int i = 0; i <= 1; i++)
+		{
+
+			p = strtok(NULL, c);
+			switch (i)
+			{
+			case 0:
+			{
+				string temp(p);
+				username = temp;
+
+			}break;
+			case 1:
+			{
+				string temp(p);
+				pass = temp;
+			}break;
+			}
+		}
+		if (type == "NXB")
+		{
+			if (username == name_account) return 1;
+		}
+	}
+	f.close();
+	return 0;
 }
 
 

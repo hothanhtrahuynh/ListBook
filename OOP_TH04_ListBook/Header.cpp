@@ -1,19 +1,92 @@
 ﻿#include "Header.h"
 #include<conio.h>
 
-int printMenu()
+int Manager::printMenu()
 {
 	int lenh;
-	cout << "WELCOME TO MY SYSTEM" << endl;
-	cout << "1.Dang nhap." << endl;
-	cout << "2.  Xem sach." << endl;
+	cout << "==========================" << endl;
+	cout << "|| WELCOME TO MY SYSTEM ||" << endl;
+	cout << "==========================" << endl;
+	cout << "1. Dang nhap." << endl;
+	cout << "2. Xem sach." << endl;
 	cout << "3. Tim sach" << endl;
 	cout << "4. Dang ky tai khoan." << endl;
+	cout << "5. Xem danh sach uu dai hien co." << endl;
+	cout << "6. Huong dan su dung." << endl;
 	cout << "0. Thoat." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
 	return lenh;
 }
+
+int Manager::getUuDai()
+{
+
+	fstream f("UuDai.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file Uudai." << endl;
+		return -1;
+	}
+	char a[256];
+	while (!f.eof())
+	{
+
+		f.getline(a, 255);
+		char c[5] = "\t";
+		char* p = NULL;
+		p = strtok(a, c);
+		if (p == NULL) continue;
+		string type(p);
+		string tensach;
+		int tuoi, mucuudai;
+		for (int i = 0; i <= 1; i++)
+		{
+
+			p = strtok(NULL, c);
+			if (p == NULL) continue;
+			switch (i)
+			{
+			case 0:
+			{
+				if (type == "UuDai_Sach")
+				{
+					string temp(p);
+					tensach = temp;
+				}
+				else
+				{
+					string temp(p);
+					tuoi = stoi(temp);
+				}
+
+			}break;
+			case 1:
+			{
+				string temp(p);
+				mucuudai = stoi(temp);
+			}break;
+			}
+			
+		}
+		if (type == "UuDai_Sach")
+		{
+			UuDai* ud = new UuDai_Sach(tensach,mucuudai);
+			ud->getData_UuDai(lb);
+			dsud.push_UuDai(ud);
+		}
+		if (type == "UuDai_Tuoi")
+		{
+			UuDai* ud = new UuDai_Tuoi(tuoi, mucuudai);
+			dsud.push_UuDai(ud);
+		}
+	}
+
+	return 1;
+}
+
+
+
 
 void getAccount(string& ten, string& pass)
 {
@@ -21,8 +94,7 @@ void getAccount(string& ten, string& pass)
 	cout << "Enter your name: "; getline(cin , ten);
 	cout << "Enter your password: "; getline(cin , pass);
 }
-
-string lognIn(string& ten, string& matkhau)
+string Manager::lognIn(string& ten, string& matkhau,int &tuoi)
 {
 
 	getAccount(ten, matkhau);
@@ -44,10 +116,11 @@ string lognIn(string& ten, string& matkhau)
 		if (p == NULL) continue;
 		string type (p);
 		string username, pass;
-		for (int i = 0; i <= 1; i++)
+		for (int i = 0; i <= 2; i++)
 		{
 			
 			p = strtok(NULL, c);
+			if (p == NULL) continue;
 			switch (i)
 			{
 				case 0:
@@ -61,6 +134,11 @@ string lognIn(string& ten, string& matkhau)
 					string temp(p);
 					pass = temp;
 				}break;
+				case 2:
+				{
+					string temp(p);
+					tuoi = stoi(temp);
+				}break;
 			}
 		}
 		if (username == ten && pass == matkhau)
@@ -72,8 +150,10 @@ string lognIn(string& ten, string& matkhau)
 	f.close();
 	return "";
 }
-void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật thông tin từ file
+void Manager::funRun()
 {
+	lb.loadfromFile();//đọc danh sách sách từ file lên
+	dsud.getUuDai(lb);
 	int lenh;
 	do
 	{
@@ -84,10 +164,11 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 		case 1:
 		{
 			string type,ten, pass;
+			int tuoi=0;
 			do
 			{
 				
-				type= lognIn(ten, pass);
+				type= lognIn(ten, pass,tuoi);
 				if (type=="")
 				{
 					cout << "Dang nhap khong thanh cong." << endl;
@@ -104,9 +185,9 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 			if (type == "User")
 			{
 				//thực hiện các thao tác của User.
-				User user(ten, pass);
+				User user(ten, pass,tuoi);
 				user.setTypeofLognIn(true);
-				user.funRunMenu(lb);
+				user.funRunMenu(lb,dsud);	
 				
 
 			}
@@ -115,7 +196,7 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 				//thực hiện các thao tác của NXB.
 				NXB nxb(ten, pass);
 				nxb.setTypeofLognIn(true);
-				nxb.funRunMenu(lb);
+				nxb.funRunMenu(lb, dsud);
 
 			}
 			else if (type == "Tac Gia")
@@ -123,7 +204,7 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 				//thực hiện các thao tác của Tac Gia.
 				TacGia tacgia(ten, pass);
 				tacgia.setTypeofLognIn(true);
-				tacgia.funRunMenu(lb);
+				tacgia.funRunMenu(lb, dsud);
 				
 			}
 			else if (type == "Admin")
@@ -131,9 +212,10 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 				//thực hiện các thao tác của Admin
 				Admin ad(ten, pass);
 				ad.setTypeofLognIn(true);
-				ad.funRunMenu(lb);
+				ad.funRunMenu(lb, dsud);
 
 			}
+			
 		}break;
 		case 2:
 		{
@@ -154,26 +236,55 @@ void funRun(ListBook& lb)//truyền vào list sách đã được cập nhật t
 			cin.ignore();
 			cout << "Ten dang nhap: "; getline(cin, ten);
 			cout << "Mat khau: "; getline(cin, pass);
-
-			Account* new_user=new User(ten, pass);
+			cout << "Tuoi cua ban la: ";
+			cin >> tuoi;
+			Account* new_user=new User(ten, pass,tuoi);
 			writeDownNewAccount(new_user);
 
 			cout <<endl<< "Dang ki thanh cong." << endl;
 			//ghi tai khoan nay vao file.
 		}break;
+		case 5:
+		{
+			dsud.xemDanhSachUudai();
+		}break;
+		case 6:
+		{
+			freadUserManual();
+		}break;
 		default:
 			lenh = 0;
+			cout << "=========================================" << endl;
+			cout << "|| CAM ON QUY KHACH DA SU DUNG DICH VU ||" << endl;
+			cout << "=========================================" << endl;
 			break;
 		}
-		_getch();
+		system("pause");
 	} while (lenh!=0);
+	lb.writeDownToFile();//viết danh sách đã được cập nhật xuống file.
 
-	// lưu danh sách sách mói vàgo file
-
-	//lưu danh sách tài khoản trở lại file.
+	//viết danh sách uu đãi ngược trở lại file.
+	dsud.writeDownUuDaiToFile();
 }
 
-void writeDownNewAccount(Account* p)
+void Manager::freadUserManual()
+{
+	fstream f("UserManual.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file Huong dan su dung." << endl;
+		return;
+	}
+	while (!f.eof())
+	{
+		char a[501];
+		f.getline(a, 500);
+		string text(a);
+		cout << text << endl;
+	}
+}
+
+void Manager::writeDownNewAccount(Account* p)
 {
 	fstream f("Account.txt",ios::app);
 	if (f.fail())
@@ -185,3 +296,4 @@ void writeDownNewAccount(Account* p)
 	f << p->nameclass() << "\t" << p->getUsernameAccount() << "\t" << p->getPassAccount();
 	
 }
+

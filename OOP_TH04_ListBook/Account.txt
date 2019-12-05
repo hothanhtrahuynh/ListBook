@@ -1,4 +1,4 @@
-User	abc	123
+User	abc	123	18
 NXB	KH&KT	khkt12345
 Admin	Thanhtra	greentea
 NXB	The Gioi	thegioi
@@ -11,3 +11,8 @@ Tac Gia	Tran Dan Thu	trandanthu
 Tac Gia	Nguyen Ngoc Ky	nguyenngocky
 NXB	Tong Hop	tonghop
 Admin	boss	bossboss
+User	thanhthoai	thanhthoai	22
+User	ngocbich	ngocbich	25
+User	vuluan	vuluan	18
+User	tanphat	tanphat	17
+

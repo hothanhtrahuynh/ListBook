@@ -44,7 +44,7 @@ void DS_HoaDon::xoaHoaDon()
 	}
 }
 
-void DS_HoaDon::upDateHoaDonThu(int pos, int soLuongMoi)
+void DS_HoaDon::upDateHoaDonThu(int pos, int soLuongMoi, ListBook& lb)
 {
 	if (pos<0 || pos>dshd.size()) return;
 	for (int i = 0; i < dshd.size(); i++)
@@ -52,8 +52,13 @@ void DS_HoaDon::upDateHoaDonThu(int pos, int soLuongMoi)
 		if (i == pos - 1)
 		{
 			dshd[i].setSoLuongSach(soLuongMoi);
+			Sach* a = lb.timSach_Ten(dshd[i].getSachTrongHoaDon().getTenSach());
+			a->setSLDaban(soLuongMoi - a->getSLDaban());
 		}
 	}
+
+
+
 }
 
 int DS_HoaDon::tongTienHoaDon()
@@ -70,7 +75,8 @@ int DS_HoaDon::fwriteToFile(fstream& f)
 {
 	for (int i = 0; i < dshd.size(); i++)
 	{
-		f.write(reinterpret_cast<const char*>(&dshd[i]), sizeof(HoaDon));
+		f << dshd[i].getSachTrongHoaDon().getMaSach() << "\t" << dshd[i].getSachTrongHoaDon().getTenSach() << "\t" << dshd[i].getSachTrongHoaDon().getTacGia() << "\t" << dshd[i].getSachTrongHoaDon().getNXB() << "\t" << dshd[i].getSachTrongHoaDon().getGiaSach() << "\t" << dshd[i].getSachTrongHoaDon().getSLDaban() << "\t" << dshd[i].getSachTrongHoaDon().getAnTacGia() << "\t" << dshd[i].getSachTrongHoaDon().getAnNXB() << "\n";
+		f << dshd[i].getSoLuong()<<" " << dshd[i].getTienHoaDon() << "\n";
 	}
 	
 	return 1;
@@ -80,10 +86,17 @@ int DS_HoaDon::freadFromFile(fstream& f)
 {
 	while (!f.eof())
 	{
-		HoaDon* temp = new HoaDon;
-		f.read(reinterpret_cast<char*>(temp), sizeof(HoaDon));
-		if(temp->getSachTrongHoaDon().getGiaSach()!=-1)
-			this->dshd.push_back(*temp);
+		char a[501];
+		f.getline(a, 500);
+		Sach temp;
+		string check(a);
+		if (check == "") continue;
+		temp.filetoSach(a);
+		int sl, tien;
+		f >> sl >> tien;	
+		HoaDon* temp_hd = new HoaDon(temp, sl, tien);
+		dshd.push_back(*temp_hd);
+		delete temp_hd;
 	}
 	
 	return 1;

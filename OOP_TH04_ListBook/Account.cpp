@@ -3,9 +3,19 @@ Account::~Account()
 {
 }
 
+void Account::setTuoi(int tuoi)
+{
+	mTuoi = tuoi;
+}
+
+int Account::getTuoi()
+{
+	return mTuoi;
+}
+
 void Account::getAccount()
 {
-	cin.ignore();
+	//cin.ignore();
 	cout << "Nhap vao ten tai khoan: ";
 	getline(cin, mTen);
 	cout << "Nhap vao mat khau:";
@@ -13,7 +23,7 @@ void Account::getAccount()
 	do
 	{
 		string pascmp;
-		cin.ignore();
+		//cin.ignore();
 		cout << "Xac nhan mat khau: ";
 		getline(cin, pascmp);
 		if (pascmp == mPass)
@@ -53,6 +63,63 @@ string Account::getPassAccount()
 void Account::setTypeofLognIn(bool a)
 {
 	logned = a;
+}
+
+void Account::getInfor_Message(string& name_account, string& text)
+{
+	cin.ignore();
+	cout << "Nhap vao ten Tac Gia muon gui tin nhan: ";
+	getline(cin, name_account);
+	cout << "Noi dung tin nhan ban muon gui: ";
+	getline(cin, text);
+}
+
+void Account::fwriteMessage(string& name_account, string& text)
+{
+	string tenfile = name_account + "_Message.txt";
+	fstream f(tenfile, ios::app);
+	if (f.fail())
+	{
+		cout << "Khong tim thay file de gui tin nhan cho user." << endl;
+		return;
+	}
+	f <<this->nameclass()<<"\t"<< this->mTen << "\t" << text << endl;
+}
+
+void Account::readMessage()
+{
+	string tenfile = mTen + "_Message.txt";
+	fstream f(tenfile);
+	if (f.fail()) { cout << "Khong mo duoc file de doc tin nhan." << endl; return; }
+	while (!f.eof())
+	{
+		string name_account, text;
+		char a[501];
+		f.getline(a, 500);
+		string check(a);
+		if (check == "") break;
+		char* p = NULL;
+		p = strtok(a, "\t");
+		string type_account(p);
+		for (int i = 1; i < 3; i++)
+		{
+			p = strtok(NULL, "\t");
+			if (p == NULL) continue;
+			if (i == 1) {
+				string temp_name_account(p); name_account = temp_name_account;
+			}
+			if (i == 2) {
+				string temp_text(p); text = temp_text;
+			}
+
+		}
+		Message temp(name_account, text);
+		dstn.push_back(temp);
+	}
+	for (int i = 0; i < dstn.size(); i++)
+	{
+		cout << dstn[i];
+	}
 }
 
 void Account::print()

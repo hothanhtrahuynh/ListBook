@@ -1,6 +1,8 @@
-﻿#ifndef _NXB_H_
+﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#ifndef _NXB_H_
 #define _NXB_H_
-
+#include"UuDai.h"
 #include"Account.h"
 
 class NXB:public Account
@@ -36,11 +38,15 @@ public:
 
 	void funRundeleBook();
 	//hàm run cho hàm deleBook...
+
 	//in menu cho NXB
 	int printMenu();
 
-	virtual void funRunMenu(ListBook& lb);
+	virtual void funRunMenu(ListBook& lb, DS_UuDai& dsud);
 	virtual string nameclass();
+	virtual void sendMessage();
+	
+	virtual int checkExistAccount(string name_account);
 };
 
 #endif 

@@ -1,4 +1,7 @@
-﻿#include"Admin.h"
+﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#include<conio.h>
+#include"Admin.h"
 
 
 
@@ -22,6 +25,9 @@ int Admin::addAccount()
 	{
 		Account* ac = new User;
 		ac->getAccount();
+		int tuoi;
+		cout << "Nhap vao so tuoi: "; cin >> tuoi;
+		ac->setTuoi(tuoi);
 		dstk.push_back(ac);
 	}
 	else if (type == "Tac Gia")
@@ -42,7 +48,44 @@ int Admin::addAccount()
 		ac->getAccount();
 		dstk.push_back(ac);
 	}
+	
+	cout << endl << "|Tao tai khoan thanh cong.|" << endl;
 	return 1;
+}
+
+void Admin::addUuDai(ListBook& lb, vector<UuDai*>& dsuudai, DS_UuDai& dsud)
+{
+	string type;
+	int uudai;
+	cout << "Nhap vao loai uu dai muon khoi tao: ";
+	cin >> type;
+	if (type=="UuDai_Sach"||type=="Sach")
+	{
+		string tensach;
+		cin.ignore();
+		cout << "Nhap vao ten sach can them vao muc uu dai: ";
+		getline(cin, tensach);
+		Sach* a = lb.timSach_Ten(tensach);
+		if (a == NULL)
+		{
+			cout << "Sach can them khong co trong thu vien sach." << endl;
+			return;
+		}
+		cout << "Muc uu dai la: "; cin >> uudai;
+		UuDai* ud = new UuDai_Sach(a,uudai);
+		dsud.push_UuDai(ud);
+	}
+	if (type == "UuDai_Tuoi"||type=="Tuoi")
+	{
+		int tuoi;
+		cout << "Tuoi duoc nhan uu dai la: ";
+		cin >> tuoi;
+		cout << "Muc uu dai: ";
+		cin >> uudai;
+		UuDai* ud = new UuDai_Tuoi(tuoi, uudai);
+		dsud.push_UuDai(ud);
+	}
+	cout << "Them uu dai thanh cong." << endl;
 }
 
 int Admin::getData()
@@ -64,10 +107,12 @@ int Admin::getData()
 		if (p == NULL) continue;
 		string type(p);
 		string username, pass;
-		for (int i = 0; i <= 1; i++)
+		int tuoi;
+		for (int i = 0; i <= 2; i++)
 		{
 
 			p = strtok(NULL, c);
+			if (p == NULL) continue;
 			switch (i)
 			{
 			case 0:
@@ -81,6 +126,12 @@ int Admin::getData()
 				string temp(p);
 				pass = temp;
 			}break;
+			case 2:
+			{
+				string temp(p);
+				tuoi = stoi(temp);
+
+			}break;
 			}
 		}
 		if (type == "User")
@@ -88,6 +139,7 @@ int Admin::getData()
 			Account* ac = new User;
 			ac->setPassAccount(pass);
 			ac->setUsernameAccount(username);
+			ac->setTuoi(tuoi);
 			dstk.push_back(ac);
 		}
 		else if (type == "Tac Gia")
@@ -116,6 +168,7 @@ int Admin::getData()
 	return 1;
 }
 
+
 void Admin::writeDownAccountToFile()
 {
 	fstream f("Account.txt");
@@ -126,14 +179,27 @@ void Admin::writeDownAccountToFile()
 	}
 	for (int i = 0; i < dstk.size(); i++)
 	{
-		f << dstk[i]->nameclass() << "\t" << dstk[i]->getUsernameAccount() << "\t" << dstk[i]->getPassAccount() << "\n";
+		
+		if (dstk[i]->nameclass() == "User")
+		{
+			f << dstk[i]->nameclass() << "\t" << dstk[i]->getUsernameAccount() << "\t" << dstk[i]->getPassAccount()<<"\t"<<dstk[i]->getTuoi() << "\n";
+		}
+		else
+		{
+			f << dstk[i]->nameclass() << "\t" << dstk[i]->getUsernameAccount() << "\t" << dstk[i]->getPassAccount() << "\n";
+		}
 	}
 	f.close();
 }
 
+
+
 int Admin::printMenu()
 {
 	int lenh;
+	cout << "=================" << endl;
+	cout << "||   ADMIN   ||" << endl;
+	cout << "=================" << endl;
 	cout << "1. Them tai khoan." << endl;
 	cout << "2. Them sach." << endl;
 	cout << "3. Khoa quyen tac gia." << endl;
@@ -142,19 +208,187 @@ int Admin::printMenu()
 	cout << "6. Xem danh sach sach." << endl;
 	cout << "7. Xoa tai khoan." << endl;
 	cout << "8. Xoa sach." << endl;
+	cout << "9. Gui tin nhan." << endl;
+	cout << "10. Uu Dai." << endl;
+	cout << "11. Thong ke." << endl;
 	cout << "0. Dang xuat (Thoat)" << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
 	return lenh;
 }
 
-void Admin::funRunMenu(ListBook& lb)
+int Admin::printMenu_Message()
 {
-	//lb.loadfromFile();
+	int lenh;
+	cout << "=====================" << endl;
+	cout << "||   GUI TIN NHAN   ||" << endl;
+	cout << "=====================" << endl;
+	cout << "1. Gui dong loat cho USER." << endl;
+	cout << "2. Gui dong loat cho Tac Gia." << endl;
+	cout << "3. Gui dong loat cho NXB." << endl;
+	cout << "4. Gui dong loat cho tat ca tai khoan." << endl;
+	cout << "5. Gui cho mot tai khoan cu the: " << endl;
+	cout << "0. Thoat." << endl;
+	cout << "Ban chon lenh: ";
+	cin >> lenh;
+	return lenh;
+}
+
+int Admin::printMenu_Thongke()
+{
+	int lenh;
+	cout << "=================" << endl;
+	cout << "||   THONG KE   ||" << endl;
+	cout << "=================" << endl;
+	cout << "1. So sach da ban." << endl;
+	cout << "2. " << endl;
+	cout << "0. Thoat" << endl;
+	cout << "Ban chon lenh: ";
+	cin >> lenh;
+	return lenh;
+}
+
+int Admin::printMenu_UuDai()
+{
+	int lenh;
+	cout << "================" << endl;
+	cout << "||   UU DAI   ||" << endl;
+	cout << "================" << endl;
+	cout << "1. Xem nhung uu dai hien co." << endl;
+	cout << "2. Them uu dai." << endl;
+	cout << "3. Xoa uu dai." << endl;
+	cout << "0. Thoat." << endl;
+	cout << "Ban chon lenh: ";
+	cin >> lenh;
+	return lenh;
+}
+
+void Admin::sendPublicMessage(string type_Account)
+{
+	string text;
+	cin.ignore();
+	cout << "Noi dung tin nhan ban muon gui: ";
+	getline(cin, text);
+	fstream f("Account.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file account." << endl;
+		return ;
+	}
+	char a[256];
+	while (!f.eof())
+	{
+
+		f.getline(a, 255);
+		char c[5] = "\t";
+		char* p = NULL;
+		p = strtok(a, c);
+		if (p == NULL) continue;
+		string type(p);
+		string username, pass;
+		for (int i = 0; i <= 1; i++)
+		{
+
+			p = strtok(NULL, c);
+			switch (i)
+			{
+			case 0:
+			{
+				string temp(p);
+				username = temp;
+
+			}break;
+			case 1:
+			{
+				string temp(p);
+				pass = temp;
+			}break;
+			}
+		}
+		if (type_Account == type)
+		{
+			fwriteMessage(username, text);
+		}
+	}
+	f.close();
+}
+
+void Admin::runThonngKefunction(ListBook& lb, DS_UuDai& dsud)
+{
+	int lenh10;
+	do
+	{
+		
+		lenh10 = printMenu_Thongke();
+		switch (lenh10)
+		{
+		case 1:
+		{
+			cout << "===========" << endl;
+			cout << "So sach ban duoc: " << lb.soSachDaban() << endl;
+			cout << "===========" << endl;
+		}break;
+		case 2:
+		{
+
+		}break;
+		case 3:
+		{
+
+		}break;
+		case 4:
+		{
+
+		}break;
+		case 5:
+		{
+
+		}break;
+		default:
+			break;
+		}
+	} while (lenh10 != 0);
+}
+
+void Admin::runUuDaiFunction(ListBook& lb, DS_UuDai& dsud)
+{
+	int lenh;
+	do
+	{
+		lenh = printMenu_UuDai();
+		switch (lenh)
+		{
+		case 1:
+		{
+			//Xem nhung uu dai hien co
+			dsud.xemDanhSachUudai();
+		}break;
+		case 2:
+		{
+			//Them uu dai moi
+			dsud.addUuDai(lb);
+		}break;
+		case 3:
+		{
+			//Xoa uu dai
+			dsud.xoaUuDai();
+		}break;
+		default:
+			lenh = 0;
+			break;
+		}
+		cout << endl;
+	} while (lenh!=0);
+}
+
+void Admin::funRunMenu(ListBook& lb, DS_UuDai& dsud)
+{
+	
 	getData();
 	int lenh;
 	do
 	{
+		system("cls");
 		lenh = printMenu();
 		switch (lenh)
 		{
@@ -184,6 +418,7 @@ void Admin::funRunMenu(ListBook& lb)
 			}break;
 			case 5:
 			{
+				cout << "Username\tPass" << endl;
 				xemDanhSachTaiKhoan();
 				cout << endl;
 			}break;
@@ -206,20 +441,82 @@ void Admin::funRunMenu(ListBook& lb)
 				lb.xoaSach();
 				cout << endl;
 			}break;
+			case 9:
+			{
+				sendMessage();
+			}break;
+			case 10:
+			{
+				runUuDaiFunction(lb,dsud);
+			}break;		
+			case 11:
+			{
+				runThonngKefunction(lb,dsud);
+			}break;
 		default:
 			lenh = 0;
 			break;
 		}
+		_getch();
 	} while (lenh!=0);
-
+	//lưu danh sách tài khoản trở lại file.
 	writeDownAccountToFile();
-
 }
 
 string Admin::nameclass()
 {
 	return "Admin";
 }
+
+void Admin::sendMessage()
+{
+	int lenh;
+	do
+	{
+		lenh = printMenu_Message();
+		switch (lenh)
+		{
+		case 1:
+		{
+			sendPublicMessage("User");
+		}break;
+		case 2:
+		{
+			sendPublicMessage("Tac Gia");
+		}break;
+		case 3:
+		{
+			sendPublicMessage("NXB");
+		}break;
+		case 4:
+		{
+			sendPublicMessage("User");
+			sendPublicMessage("Tac Gia");
+			sendPublicMessage("NXB");
+		}break;
+		case 5:
+		{
+			string name_user, text;
+			getInfor_Message(name_user, text);
+			if (checkExistAccount(name_user) == 0)
+			{
+				cout << "Khong tim thay tai khoan nao voi ten vua nhap." << endl;
+				cout << "Vui long thu lai." << endl;
+				return;
+			}
+			fwriteMessage(name_user, text);
+		}break;
+		default:
+		{
+			lenh = 0;
+		}break;
+		}
+		
+	} while (lenh!=0);
+
+}
+
+
 
 void Admin::khoaTacGia(ListBook& lb)
 {
@@ -253,6 +550,7 @@ void Admin::khoaNXB(ListBook& lb)
 	cout << "Khoa thanh cong" << endl;
 }
 
+
 void Admin::xemDanhSachTaiKhoan()
 {
 	cout << "DANH SACH TAI KHOAN" << endl;
@@ -284,5 +582,72 @@ int Admin::xoaTaiKhoan()
 			return 1;
 		}
 	}
+	return 0;
+}
+
+int Admin::xoaUuDai(vector<UuDai*>& dsuudai)
+{
+
+	int stt;
+	cout << "Nhap vao thu tu uu dai muon xoa trong danh sach tren: ";
+	cin >> stt;
+	for (int i = 0; i < dsuudai.size(); i++)
+	{
+		if (stt == i + 1)
+		{
+			dsuudai.erase(dsuudai.begin() + i);
+			cout << "Xoa thanh cong." << endl;
+			return 1;
+		}
+	}
+	cout << "Xoa that bai." << endl;
+	return 0;
+}
+
+int Admin::checkExistAccount(string name_account)
+{
+	fstream f("Account.txt");
+	if (f.fail())
+	{
+		cout << "Khong mo duoc file account." << endl;
+		return -1;
+	}
+	char a[256];
+
+	while (!f.eof())
+	{
+
+		f.getline(a, 255);
+		char c[5] = "\t";
+		char* p = NULL;
+		p = strtok(a, c);
+		if (p == NULL) continue;
+		string type(p);
+		string username, pass;
+		for (int i = 0; i <= 1; i++)
+		{
+
+			p = strtok(NULL, c);
+			switch (i)
+			{
+			case 0:
+			{
+				string temp(p);
+				username = temp;
+
+			}break;
+			case 1:
+			{
+				string temp(p);
+				pass = temp;
+			}break;
+			}
+		}
+		if (type == "Admin")
+		{
+			if (username == name_account) return 1;
+		}
+	}
+	f.close();
 	return 0;
 }

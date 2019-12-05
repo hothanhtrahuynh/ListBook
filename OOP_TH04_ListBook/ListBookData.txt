@@ -1,39 +1,39 @@
-1	Clean Code	Robert C.Martin	Software Process Naturalist	85000
-2	Co So Du Lieu	Dong Thi Bich Thuy	KH&KT	25000
-3	Ky Thuat Lap Trinh	Tran Dan Thu	KH&KT	64000
-4	Toi Tu Hoc	Nguyen Duy Can	Tre	60000
-5	Toi Hoc Dai Hoc	Nguyen Ngoc Ky	FirstNew	88000
-6	The Promise of Pencil	Adam Braun	The Gioi	129000
-7	Nhap Mon Lap Trinh	Tran Dan Thu	KH&KT	40000
-9	The IELTS speakings topics	The Windy	Hong Duc	120000
-10	CTDL va GT	Tran Hanh Nhi	DHKHTN	30000
-11	Cracking the Coding Interview	Gayle Lakmann	Career Cup	630000
-8	Xac suat thong ke	Nguyen Van Thin	DHQGTPHCM	30000
-12	Duy Tam va Duy Vat	Nguyen Duy Can	Tre	120000
-13	Thuat Yeu Duong	Nguyen Duy Can	Tre	56000
-14	Mot Nghe Thuat Song	Nguyen Duy Can	Tre	27000
-15	Cai Cuoi Cua Thanh Nhan	Nguyen Duy Can	Tre	56000
-16	Van Minh Dong Phuong va Tay Phuong	Nguyen Duy Can	Tre	35000
-17	Toi Thay Hoa Vang Tren Co Xanh	Nguyen Nhat Anh	Tre	60000
-18	Truyen ngan Nguyen Hong	Nguyen Hong	The Gioi	28000
-19	The Gioi Phang	Thomas L.Friedman	Tre	211500
-20	Di Tim Le Song	Viktor E.Frankl	Tong Hop	56940
-21	Truyen ngan Thach Lam	Thach Lam	Tong Hop	42000
-22	Truyen ngan Nam Cao	Nam Cao	Tong hop	90000
-23	Truyen ngan Vu Trong Phung	Vu Trong Phung	Tong hop	80000
-24	Khi nguoi ta lon	BS. Do Hong Ngoc	Tong hop	79200
-25	Con nguoi va thien nhien ky thu	Thanh Nien	The Gioi	34000
-26	Que huong Viet Nam	Mai Ly Quang	The Gioi	28200
-27	Gia Tri Cua Su Tu Te	Piero Ferrucci	Hong Duc	86500
-28	Kheo An Kheo Noi Se Co Duoc Thien Ha	Mai Hien-Dinh Phuc	Hong Duc	101600
-29	Hoc Nhu Mot Thien Tai	Ulrich Boser	Hong Duc	103200
-30	Nhung Tam Hon Yeu Dau	Nguyen Ngoc Ky	Phu Nu	39000
-31	Tuyen tap Cau do vui	Nguyen Ngoc Ky	Tre	297000
-32	Toi Di Hoc	Nguyen Ngoc Ky	Tre	49300
-33	Co gai den tu hom qua	Nguyen Nhat Anh	Tre	39000
-34	Mat Biec	Nguyen Nhat Anh	Tre	34600
-35	Chu Be Rac Roi	Nguyen Nhat Anh	Tre	56000
-36	Con cho nho mang gio hoa hong	Nguyen Nhat Anh	Tre	87200
-37	Chuc mot nay tot lanh	Nguyen Nhat Anh	Tre	76500
-38	Chi Pheo	Nam Cao	Van Hoc	159200
-39	Nam Cao tieu thuyet	Nam Cao	Van Hoc	61920
+1	Clean Code	Robert C.Martin	Software Process Naturalist	85000	0	0	0
+2	Co So Du Lieu	Dong Thi Bich Thuy	KH&KT	25000	0	0	0
+3	Ky Thuat Lap Trinh	Tran Dan Thu	KH&KT	64000	0	0	0
+4	Toi Tu Hoc	Nguyen Duy Can	Tre	60000	0	0	0
+5	Toi Hoc Dai Hoc	Nguyen Ngoc Ky	FirstNew	88000	0	0	0
+6	The Promise of Pencil	Adam Braun	The Gioi	129000	0	0	0
+7	Nhap Mon Lap Trinh	Tran Dan Thu	KH&KT	40000	0	0	0
+9	The IELTS speakings topics	The Windy	Hong Duc	120000	0	0	0
+10	CTDL va GT	Tran Hanh Nhi	DHKHTN	30000	0	0	0
+11	Cracking the Coding Interview	Gayle Lakmann	Career Cup	630000	0	0	0
+8	Xac suat thong ke	Nguyen Van Thin	DHQGTPHCM	30000	0	0	0
+12	Duy Tam va Duy Vat	Nguyen Duy Can	Tre	120000	0	0	0
+13	Thuat Yeu Duong	Nguyen Duy Can	Tre	56000	0	0	0
+14	Mot Nghe Thuat Song	Nguyen Duy Can	Tre	27000	0	0	0
+15	Cai Cuoi Cua Thanh Nhan	Nguyen Duy Can	Tre	56000	0	0	0
+16	Van Minh Dong Phuong va Tay Phuong	Nguyen Duy Can	Tre	35000	0	0	0
+17	Toi Thay Hoa Vang Tren Co Xanh	Nguyen Nhat Anh	Tre	60000	0	0	0
+18	Truyen ngan Nguyen Hong	Nguyen Hong	The Gioi	28000	0	0	0
+19	The Gioi Phang	Thomas L.Friedman	Tre	211500	0	0	0
+20	Di Tim Le Song	Viktor E.Frankl	Tong Hop	56940	0	0	0
+21	Truyen ngan Thach Lam	Thach Lam	Tong Hop	42000	0	0	0
+22	Truyen ngan Nam Cao	Nam Cao	Tong hop	90000	0	0	0
+23	Truyen ngan Vu Trong Phung	Vu Trong Phung	Tong hop	80000	0	0	0
+24	Khi nguoi ta lon	BS. Do Hong Ngoc	Tong hop	79200	0	0	0
+25	Con nguoi va thien nhien ky thu	Thanh Nien	The Gioi	34000	0	0	0
+26	Que huong Viet Nam	Mai Ly Quang	The Gioi	28200	0	0	0
+27	Gia Tri Cua Su Tu Te	Piero Ferrucci	Hong Duc	86500	0	0	0
+28	Kheo An Kheo Noi Se Co Duoc Thien Ha	Mai Hien-Dinh Phuc	Hong Duc	101600	0	0	0
+29	Hoc Nhu Mot Thien Tai	Ulrich Boser	Hong Duc	103200	0	0	0
+30	Nhung Tam Hon Yeu Dau	Nguyen Ngoc Ky	Phu Nu	39000	0	0	0
+31	Tuyen tap Cau do vui	Nguyen Ngoc Ky	Tre	297000	0	0	0
+32	Toi Di Hoc	Nguyen Ngoc Ky	Tre	49300	0	0	0
+33	Co gai den tu hom qua	Nguyen Nhat Anh	Tre	39000	0	0	0
+34	Mat Biec	Nguyen Nhat Anh	Tre	34600	0	0	0
+35	Chu Be Rac Roi	Nguyen Nhat Anh	Tre	56000	0	0	0
+36	Con cho nho mang gio hoa hong	Nguyen Nhat Anh	Tre	87200	0	0	0
+37	Chuc mot nay tot lanh	Nguyen Nhat Anh	Tre	76500	0	0	0
+38	Chi Pheo	Nam Cao	Van Hoc	159200	0	0	0
+39	Nam Cao tieu thuyet	Nam Cao	Van Hoc	61920	0	0	0

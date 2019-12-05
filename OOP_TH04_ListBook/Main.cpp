@@ -2,10 +2,7 @@
 
 int main()
 {
-	ListBook l;
-	l.loadfromFile();
-	l.xuatDanhSachSach();
+	Manager library;
+	library.funRun();
 	
-	funRun(l);
-	l.writeDownToFile();
 }

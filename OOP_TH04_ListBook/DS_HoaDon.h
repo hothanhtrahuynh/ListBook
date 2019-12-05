@@ -11,7 +11,7 @@ public:
 	void themHoaDon(ListBook &a);
 	void xuatDSHoaDon();
 	void xoaHoaDon();
-	void upDateHoaDonThu(int pos, int soLuongMoi);
+	void upDateHoaDonThu(int pos, int soLuongMoi,ListBook& lb);
 	int tongTienHoaDon();
 	int fwriteToFile(fstream& f);
 	int freadFromFile(fstream& f);
