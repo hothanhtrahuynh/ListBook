@@ -1,2 +1,2 @@
-1	Clean Code	Robert C.Martin	Software Process Naturalist	85000	0	0
-185000
+2	Co So Du Lieu	Dong Thi Bich Thuy	KH&KT	25000	11	0	0
+2 50000 0 0

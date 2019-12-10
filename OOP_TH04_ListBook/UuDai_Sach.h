@@ -27,6 +27,9 @@ public:
 	void setSachUuDai(string tensach);
 
 	void getData_UuDai_Sach(ListBook&lb);
+
+	virtual int getTuoiUuDai();
+	virtual Sach* getSachUuDai();
 	virtual void getData_UuDai(ListBook& lb);
 	virtual void print();
 	virtual string nameclass();

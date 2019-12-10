@@ -42,6 +42,15 @@ public:
 	//in menu cho NXB
 	int printMenu();
 
+	//đếm số sách được bán 
+	int countSoldBook();
+
+	//in ra sách được mua nhiều nhất
+	void bestSoldBook();
+
+	//Khóa hay mở sách của NXB mà NXB muốn
+	void LockedOrUnlocked();
+
 	virtual void funRunMenu(ListBook& lb, DS_UuDai& dsud);
 	virtual string nameclass();
 	virtual void sendMessage();

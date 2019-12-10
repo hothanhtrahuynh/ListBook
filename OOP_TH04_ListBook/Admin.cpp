@@ -168,6 +168,23 @@ int Admin::getData()
 	return 1;
 }
 
+void Admin::loadDSHoaDon()
+{
+	for (int i = 0; i < dstk.size(); i++)
+	{
+		if (dstk[i]->nameclass() == "User")
+		{
+			User* user = new User(dstk[i]->getUsernameAccount(), dstk[i]->getPassAccount(), dstk[i]->getTuoi());
+			user->freadFromFile();
+			DS_HoaDon  User_DSHD = user->getDanhSachHoaDon();
+			if (!User_DSHD.checkEmpty())
+			{
+				mang_DSHoaDon.push_back(User_DSHD);
+			}
+		}
+	}
+}
+
 
 void Admin::writeDownAccountToFile()
 {
@@ -209,8 +226,10 @@ int Admin::printMenu()
 	cout << "7. Xoa tai khoan." << endl;
 	cout << "8. Xoa sach." << endl;
 	cout << "9. Gui tin nhan." << endl;
-	cout << "10. Uu Dai." << endl;
-	cout << "11. Thong ke." << endl;
+	cout << "10. Doc tin nhan." << endl;
+	cout << "11. Uu Dai." << endl;
+	cout << "12. Thong ke." << endl;
+	cout << "13. Xem danh sach hoa don trong he thong." << endl;
 	cout << "0. Dang xuat (Thoat)" << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
@@ -241,7 +260,8 @@ int Admin::printMenu_Thongke()
 	cout << "||   THONG KE   ||" << endl;
 	cout << "=================" << endl;
 	cout << "1. So sach da ban." << endl;
-	cout << "2. " << endl;
+	cout << "2. Sach ban chay nhat." << endl;
+	cout << "3. Hoa don co tong tien thanh toan dac nhat." << endl;
 	cout << "0. Thoat" << endl;
 	cout << "Ban chon lenh: ";
 	cin >> lenh;
@@ -269,6 +289,7 @@ void Admin::sendPublicMessage(string type_Account)
 	cin.ignore();
 	cout << "Noi dung tin nhan ban muon gui: ";
 	getline(cin, text);
+	text = "Admin: " + text;
 	fstream f("Account.txt");
 	if (f.fail())
 	{
@@ -318,23 +339,35 @@ void Admin::runThonngKefunction(ListBook& lb, DS_UuDai& dsud)
 	int lenh10;
 	do
 	{
-		
+		system("cls");
 		lenh10 = printMenu_Thongke();
 		switch (lenh10)
 		{
 		case 1:
 		{
-			cout << "===========" << endl;
+			cout << "====================================" << endl;
 			cout << "So sach ban duoc: " << lb.soSachDaban() << endl;
-			cout << "===========" << endl;
+			cout << "====================================" << endl;
 		}break;
-		case 2:
+		case 2://sách bán chạy nhất.
 		{
-
+			vector<Sach> ds;
+			lb.bestSellerBook(ds);
+			cout << "=========================" << endl;
+			cout << "| SACH BAN CHAY NHAT LA |" << endl;
+			cout << "=========================" << endl;
+			for (int i = 0; i < ds.size(); i++)
+			{
+				cout << ds[i] << endl;
+			}
+			cout << endl;
 		}break;
 		case 3:
 		{
-
+			cout << "=======================================================" << endl;
+			cout << "|       HOA DON CO TONG TIEN THANH TOAN LON NHAT      |" << endl;
+			cout << "=======================================================" << endl;
+			timHaoDonDacNhat();
 		}break;
 		case 4:
 		{
@@ -345,8 +378,10 @@ void Admin::runThonngKefunction(ListBook& lb, DS_UuDai& dsud)
 
 		}break;
 		default:
+			lenh10 = 0;
 			break;
 		}
+		system("pause>nul");
 	} while (lenh10 != 0);
 }
 
@@ -385,6 +420,7 @@ void Admin::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 {
 	
 	getData();
+	loadDSHoaDon();
 	int lenh;
 	do
 	{
@@ -447,11 +483,22 @@ void Admin::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 			}break;
 			case 10:
 			{
-				runUuDaiFunction(lb,dsud);
-			}break;		
+				funReadMessage();
+			}break;
 			case 11:
 			{
+				runUuDaiFunction(lb,dsud);
+			}break;		
+			case 12 :
+			{
 				runThonngKefunction(lb,dsud);
+			}break;
+			case 13:
+			{
+				cout << "===============================================" << endl;
+				cout << "|       DANH SACH HOA DON TRONG HE THONG      |" << endl;
+				cout << "===============================================" << endl;
+				xemDanhSachHoaDon();
 			}break;
 		default:
 			lenh = 0;
@@ -554,6 +601,7 @@ void Admin::khoaNXB(ListBook& lb)
 void Admin::xemDanhSachTaiKhoan()
 {
 	cout << "DANH SACH TAI KHOAN" << endl;
+	cout << "Ten tai khoan" << setw(30) << "Mat khau" << endl;
 	vector<Account*>::iterator it;
 	for (it = dstk.begin(); it != dstk.end(); ++it)
 	{
@@ -561,6 +609,37 @@ void Admin::xemDanhSachTaiKhoan()
 		cout << endl;
 	}
 	cout << endl;
+}
+
+void Admin::xemDanhSachHoaDon()
+{
+	for (int i = 0; i < mang_DSHoaDon.size(); i++)
+	{
+		mang_DSHoaDon[i].xuatDSHoaDon();
+	}
+}
+
+void Admin::timHaoDonDacNhat()
+{
+	if (mang_DSHoaDon.size() == 0) return;
+	int max = mang_DSHoaDon[0].tongTienHoaDon();
+	for (int i = 1; i < mang_DSHoaDon.size(); i++)
+	{
+		if (max < mang_DSHoaDon[i].tongTienHoaDon())
+		{
+			max = mang_DSHoaDon[i].tongTienHoaDon();
+		}
+	}
+	for (int i = 0; i < mang_DSHoaDon.size(); i++)
+	{
+		if (max == mang_DSHoaDon[i].tongTienHoaDon())
+		{
+			mang_DSHoaDon[i].xuatDSHoaDon();
+		}
+	}
+	cout << "======================================" << endl;
+	cout << "| Tong tien hoa don la: " << max << "          |"<<endl;
+	cout << "======================================" << endl;
 }
 
 int Admin::xoaTaiKhoan()

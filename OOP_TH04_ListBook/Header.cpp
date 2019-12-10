@@ -182,45 +182,63 @@ void Manager::funRun()
 				}
 			} while (type==""); 
 			cout << "Dang nhap thanh cong." << endl;
-			if (type == "User")
+			Account* ac = NULL;
+			if(type=="User")
 			{
-				//thực hiện các thao tác của User.
-				User user(ten, pass,tuoi);
-				user.setTypeofLognIn(true);
-				user.funRunMenu(lb,dsud);	
-				
-
+				ac = new User(ten, pass, tuoi);
 			}
 			else if (type == "NXB")
 			{
-				//thực hiện các thao tác của NXB.
-				NXB nxb(ten, pass);
-				nxb.setTypeofLognIn(true);
-				nxb.funRunMenu(lb, dsud);
-
+				ac = new NXB(ten, pass);
 			}
 			else if (type == "Tac Gia")
 			{
-				//thực hiện các thao tác của Tac Gia.
-				TacGia tacgia(ten, pass);
-				tacgia.setTypeofLognIn(true);
-				tacgia.funRunMenu(lb, dsud);
-				
+				ac = new TacGia(ten, pass);
 			}
-			else if (type == "Admin")
+			else if(type=="Admin")
 			{
-				//thực hiện các thao tác của Admin
-				Admin ad(ten, pass);
-				ad.setTypeofLognIn(true);
-				ad.funRunMenu(lb, dsud);
-
+				ac = new Admin(ten, pass);
 			}
+			ac->funRunMenu(lb, dsud);
+			//if (type == "User")
+			//{
+			//	//thực hiện các thao tác của User.
+			//	User user(ten, pass,tuoi);
+			//	user.setTypeofLognIn(true);
+			//	user.funRunMenu(lb,dsud);	
+			//	
+
+			//}
+			//else if (type == "NXB")
+			//{
+			//	//thực hiện các thao tác của NXB.
+			//	NXB nxb(ten, pass);
+			//	nxb.setTypeofLognIn(true);
+			//	nxb.funRunMenu(lb, dsud);
+
+			//}
+			//else if (type == "Tac Gia")
+			//{
+			//	//thực hiện các thao tác của Tac Gia.
+			//	TacGia tacgia(ten, pass);
+			//	tacgia.setTypeofLognIn(true);
+			//	tacgia.funRunMenu(lb, dsud);
+			//	
+			//}
+			//else if (type == "Admin")
+			//{
+			//	//thực hiện các thao tác của Admin
+			//	Admin ad(ten, pass);
+			//	ad.setTypeofLognIn(true);
+			//	ad.funRunMenu(lb, dsud);
+
+			//}
 			
 		}break;
 		case 2:
 		{
-
-			lb.xuatDanhSachSach();
+			
+			lb.xuatdanhsach_KhongAn();
 			cout << endl;
 
 		}break;
@@ -231,10 +249,28 @@ void Manager::funRun()
 		}break;
 		case 4:
 		{
+			cout << "==========================" << endl;
+			cout << "|    DANG KY TAI KHOAN   |" << endl;
+			cout << "==========================" << endl;
 			string ten, pass;
 			int tuoi;
-			cin.ignore();
-			cout << "Ten dang nhap: "; getline(cin, ten);
+			int lenh;
+			do
+			{
+				
+				cin.ignore();
+				cout << "Ten dang nhap: "; getline(cin, ten);
+				User temp;
+				int check = temp.checkExistAccount(ten);
+				if (check == 1)
+				{
+					cout << "Ten dang nhap da ton tai." << "Vui long nhap lai." << endl;
+					cout << "(1) - Thu lai.            (2) - Ngung." << endl;
+					cout << "Ban chon: "; cin >> lenh;
+				}
+				else if (check == 0) break;
+			} while (lenh!=2);
+			if (lenh == 2)break;
 			cout << "Mat khau: "; getline(cin, pass);
 			cout << "Tuoi cua ban la: ";
 			cin >> tuoi;
@@ -250,6 +286,7 @@ void Manager::funRun()
 		}break;
 		case 6:
 		{
+			system("cls");
 			freadUserManual();
 		}break;
 		default:
@@ -293,7 +330,7 @@ void Manager::writeDownNewAccount(Account* p)
 		return;
 	}
 	
-	f << p->nameclass() << "\t" << p->getUsernameAccount() << "\t" << p->getPassAccount();
+	f << p->nameclass() << "\t" << p->getUsernameAccount() << "\t" << p->getPassAccount()<<"\t"<<p->getTuoi();
 	
 }
 

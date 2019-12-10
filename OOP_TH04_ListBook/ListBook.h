@@ -12,7 +12,12 @@ private:
 	vector <Sach> lb;
 public:
 	void taoDanhSachSach();
+	//xuất tất cả các sách có trong danh sách
 	void xuatDanhSachSach();
+	
+	//xuất danh sách các sách đã kiểm qua thuộc tính ẩn do Tác Giả và NXB
+	void xuatdanhsach_KhongAn();
+
 	int timSachTheoTen(string&);
 	int timSachTheoTacGia(string&);
 	void capNhatGiaSach();
@@ -23,11 +28,16 @@ public:
 	//dem so luong sach thuoc loai type duoc truyen vao
 	int demSach(string nxb,int type);
 	
+	//tính tổng số sách đã bán
 	int soSachDaban();
+
+	//Sách được mua nhiều nhất
+	void bestSellerBook(vector <Sach>& ds);
 
 	int checkExistBook(Sach& a);
 	int timSachTheoMaSach(int);
 	int loadfromFile();
+
 
 	//ghi lại các thao tác --> danh sách cuối cùng vào file.
 	void writeDownToFile();

@@ -35,14 +35,35 @@ void ListBook::taoDanhSachSach()
 
 void ListBook::xuatDanhSachSach()
 {
-	cout << endl << "DANH SACH SACH DA NHAP" << endl;
+	
+	cout << endl <<setw(80)<< "DANH SACH SACH" << endl;
+	cout <<setw(95)<< "==========================================" << endl;
 	int i = 0;
+	cout << "ID" << setw(30) << "Ten sach" << setw(30) << "Tac gia" << setw(35) << "NXB" << setw(15) << "Gia"<<"   Da ban" << endl;
 	while (i < lb.size())
 	{
 		cout << lb[i++] << endl;
 	}
+	cout << setw(95) << "==========================================" << endl;
 }
 
+
+void ListBook::xuatdanhsach_KhongAn()
+{
+	cout << endl << setw(80) << "DANH SACH SACH" << endl;
+	cout << setw(95) << "==========================================" << endl;
+	int i = 0;
+	cout << "ID" << setw(30) << "Ten sach" << setw(30) << "Tac gia" << setw(35) << "NXB" << setw(15) << "Gia" << "   Da ban" << endl;
+	for (int i = 0; i < lb.size(); i++)
+	{
+		if (!lb[i].getAnSachNXB() && !lb[i].getAnSachTacGia())
+		{
+			cout << lb[i] << endl;
+		}
+	}
+	cout << setw(95) << "==========================================" << endl;
+	
+}
 
 int ListBook::timSachTheoTen(string& name)
 {
@@ -56,6 +77,7 @@ int ListBook::timSachTheoTen(string& name)
 		}
 		i++;
 	}
+	cout << "Khong co sach voi ten vua nhap" << endl;
 	return -1;
 }
 int ListBook::timSachTheoTacGia(string& tg)
@@ -79,6 +101,7 @@ Sach* ListBook::timSach_Ten(string name)
 		}
 		i++;
 	}
+
 	return NULL;
 }
 
@@ -214,6 +237,26 @@ void ListBook::xoaSach()
 	cout << "Ban da xoa thanh cong sach " << tensach << " ." << endl;
 }
 
+void ListBook::bestSellerBook(vector <Sach>& ds)
+{
+	
+	int max = lb[0].getSLDaban();
+	for (int i = 0; i < lb.size(); i++)
+	{
+		if (max < lb[i].getSLDaban())
+		{
+			max = lb[i].getSLDaban();
+		}
+	}
+	for (int i = 0; i < lb.size(); i++)
+	{
+		if (max == lb[i].getSLDaban())
+		{
+			ds.push_back(lb[i]);
+		}
+	}
+}
+
 int ListBook::checkExistBook(Sach& a)
 {
 	vector<Sach>::iterator it;
@@ -267,6 +310,7 @@ int ListBook::loadfromFile()
 		this->lb.push_back(temp);
 	}*/
 	f.close();
+
 }
 
 void ListBook::writeDownToFile()
@@ -279,7 +323,7 @@ void ListBook::writeDownToFile()
 	}
 	for (int i = 0; i < this->lb.size(); i++)
 	{
-		f << lb[i].getMaSach() << "\t" << lb[i].getTenSach() << "\t" << lb[i].getTacGia() << "\t" << lb[i].getNXB() << "\t" << lb[i].getGiaSach()<<"\t"<<lb[i].getSLDaban()<<"\t"<<lb[i].getAnTacGia()<<"\t"<<lb[i].getAnNXB() << "\n";
+		f << lb[i].getMaSach() << "\t" << lb[i].getTenSach() << "\t" << lb[i].getTacGia() << "\t" << lb[i].getNXB() << "\t" << lb[i].getGiaSach()<<"\t"<<lb[i].getSLDaban()<<"\t"<<lb[i].getAnTacGia()<<"\t"<<lb[i].getAnNXB() <<"\t"<<lb[i].getAnSachTacGia()<<"\t"<<lb[i].getAnSachNXB()<<"\n";
 	}
 }
 

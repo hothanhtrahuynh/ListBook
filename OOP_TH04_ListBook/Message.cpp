@@ -28,7 +28,7 @@ string Message::getText()
 
 ostream& operator<<(ostream& out, Message& tn)
 {
-	out << tn.senderAccount_name << " : " << tn.text << endl;
+	out <<tn.nameclass<< tn.senderAccount_name << " : " << tn.text << endl;
 	return out;
 	// TODO: insert return statement here
 }

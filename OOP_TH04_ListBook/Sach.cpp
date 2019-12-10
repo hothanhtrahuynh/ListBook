@@ -11,6 +11,7 @@ Sach::Sach()
 	tacGia = "noname";
 	NXB = "noname";
 	anTacGia = anNXB = false;
+	anSach_TacGia = anSach_NXB = false;
 	sl_Daban = 0;
 }
 
@@ -33,6 +34,8 @@ Sach::Sach(const Sach& a)
 	this->NXB = a.NXB;
 	anTacGia = a.anTacGia;
 	anNXB = a.anNXB;
+	anSach_TacGia = a.anSach_TacGia;
+	anSach_NXB = a.anSach_NXB;
 	sl_Daban = a.sl_Daban;
 }
 
@@ -69,6 +72,16 @@ void Sach::setAnTacGia(bool a)
 void Sach::setAnNXB(bool a)
 {
 	anNXB = a;
+}
+
+void Sach::setAnSachTacGia(bool a)
+{
+	anSach_TacGia = a;
+}
+
+void Sach::setAnSachNXb(bool a)
+{
+	anSach_NXB = a;
 }
 
 void Sach::setSLDaban(int sl)
@@ -109,6 +122,16 @@ bool Sach::getAnTacGia()
 bool Sach::getAnNXB()
 {
 	return anNXB;
+}
+
+bool Sach::getAnSachTacGia()
+{
+	return anSach_TacGia;
+}
+
+bool Sach::getAnSachNXB()
+{
+	return anSach_NXB;
 }
 
 int Sach::getSLDaban()
@@ -212,7 +235,14 @@ void Sach::filetoSach(char *a)
 			{
 				anNXB = atoi(p);
 			}break;
-			
+			case 7:
+			{
+				anSach_TacGia = atoi(p);
+			}break;
+			case 8:
+			{
+				anSach_NXB = atoi(p);
+			}break;
 		}
 	}
 
@@ -242,11 +272,11 @@ istream& operator>>(istream& IDev, Sach& a)
 
 ostream& operator<<(ostream& ODev, Sach& a)
 {
-	ODev  << a.masach << "	";
-	ODev << a.tensach << "	";
-	cout << a.tacGia << "	";
-	cout << a.NXB << "	";
-	cout << a.gia << "	" << a.getSLDaban();
+	ODev << a.masach << "	";
+	ODev<<setw(35) << a.tensach << "	";
+	cout <<setw(20)<< a.tacGia << "	";
+	cout << setw(30) << a.NXB << "	";
+	cout <<setw(10)<< a.gia << "	" << a.getSLDaban();
 	return ODev;
 	// TODO: insert return statement here
 }

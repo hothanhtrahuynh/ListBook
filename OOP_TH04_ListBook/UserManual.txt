@@ -1,5 +1,6 @@
-HUONG DAN SU DUNG
-=================
+===========================================================================================================================
+|                                                     HUONG DAN SU DUNG                                                   |
+===========================================================================================================================
 - Neu ban da co tai khoan thi chon DANG NHAP de thuc hien cac thaot ac ke tiep.4
 - Neu chua co tao khoan thi ban co the chon TAO TAI KHOAN de co the dang nhap va thuc hien cac thao tac khac.
 - Doi voi nguoi dung chua co tai khoan thi chi co the xem sach hien co tren he thong.

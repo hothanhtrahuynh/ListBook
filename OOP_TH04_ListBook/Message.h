@@ -10,12 +10,14 @@ class Message
 private:
 	string senderAccount_name;
 	string text;
+	string nameclass;
 public:
 	Message() { senderAccount_name = "None"; text = ""; };
-	Message(string &name, string &text)
+	Message(string &name, string &text,string nameclass)
 	{
 		senderAccount_name = name;
 		this->text = text;
+		this->nameclass = nameclass;
 	}
 	Message(const Message& a);
 

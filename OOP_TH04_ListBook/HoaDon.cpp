@@ -5,6 +5,7 @@
 HoaDon::HoaDon()
 {
 	this->sl = -1;
+	applied_promotion = payed = false;
 }
 
 HoaDon::HoaDon(const HoaDon& hd)
@@ -12,6 +13,8 @@ HoaDon::HoaDon(const HoaDon& hd)
 	sach = hd.sach;
 	this->sl = hd.sl;
 	this->tongTien = hd.tongTien;
+	applied_promotion = hd.applied_promotion;
+	payed = hd.payed;
 }
 
 
@@ -27,7 +30,7 @@ int HoaDon::taoHoaDon(ListBook& a)
 	cout << "Nhap vao ten sach can tao hoa don: ";
 	getline(cin,name);//tên sách cần tìm
 	Sach temp,*b=a.timSach_Ten(name);//tìm sách trong DS sách với tên đã nhập rồi gán cho biến b
-	if (temp.getGiaSach() == b->getGiaSach())
+	if (b==NULL)
 	{
 		cout << "Sach vua nhap khong co trong danh sach" << endl;
 		return-1;
@@ -52,6 +55,21 @@ void HoaDon::setSoLuongSach(int n)
 	tongTien = sl * sach.getGiaSach();
 }
 
+void HoaDon::setTongTien(int tien)
+{
+	tongTien = tien;
+}
+
+void HoaDon::setPayed(bool a)
+{
+	payed = a;
+}
+
+void HoaDon::setApplied_Promotion(bool a)
+{
+	applied_promotion = a;
+}
+
 Sach HoaDon::getSachTrongHoaDon()
 {
 	return sach;
@@ -65,6 +83,16 @@ int HoaDon::getTienHoaDon()
 int HoaDon::getSoLuong()
 {
 	return sl;
+}
+
+bool HoaDon::getPayed()
+{
+	return payed;
+}
+
+bool HoaDon::getAppliedPromotion()
+{
+	return applied_promotion;
 }
 
 ostream& operator<<(ostream& out, HoaDon& b)

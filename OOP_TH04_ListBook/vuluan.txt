@@ -1,0 +1,4 @@
+22	Truyen ngan Nam Cao	Nam Cao	Tong hop	90000	0	0	0
+9 810000 0 0
+21	Truyen ngan Thach Lam	Thach Lam	Tong Hop	42000	0	0	0
+6 252000 0 0

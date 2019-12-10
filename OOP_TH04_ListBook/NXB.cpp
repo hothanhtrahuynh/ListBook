@@ -46,6 +46,7 @@ Sach* NXB::findSachfromNXBList(string tensach)
 	{
 		if ((*it)->getTenSach() == tensach) return *it;
 	}
+	cout << "Khong tim thay sach voi ten vua nhap trong danh sach." << endl;
 	return NULL;
 }
 
@@ -123,15 +124,91 @@ void NXB::funRundeleBook()
 int NXB::printMenu()
 {
 	int lenh;
+	cout << "===================================" << endl;
+	cout << "|            NHA XUAT BAN         |" << endl;
+	cout << "===================================" << endl;
 	cout << "1. Xem danh sach sach." << endl;
 	cout << "2. Them sach vao danh sach. " << endl; //(indivitual list book)
 	cout << "3. Cap nhat lai gia sach." << endl;
 	cout << "4. Xoa sach." << endl;
 	cout << "5. Gui tin nhan." << endl;
+	cout << "6. Doc tin nhan" << endl;
+	cout << "7. Thong ke sach da ban." << endl;
+	cout << "8. Khoa/Mo sach." << endl;
+	cout << "9. Sach co luot mua cao nhat." << endl;
 	cout << "0. Dang xuat (Thoat)." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
 	return lenh;
+}
+
+int NXB::countSoldBook()
+{
+	int tong = 0;
+	for (int i = 0; i < dsSach.size(); i++)
+	{
+		tong += dsSach[i]->getSLDaban();
+	}
+	return tong;
+}
+
+void NXB::bestSoldBook()
+{
+	cout << "========================================" << endl;
+	cout << "| DANH SACH BAN CHAY CUA NHA XUAT BAN  |" << endl;
+	cout << "========================================" << endl;
+	int max = dsSach[0]->getSLDaban();
+	for (int i = 1; i < dsSach.size(); i++)
+	{
+		if (max < dsSach[i]->getSLDaban())
+		{
+			max = dsSach[i]->getSLDaban();
+		}
+	}
+
+	for (int i = 1; i < dsSach.size(); i++)
+	{
+		if (max < dsSach[i]->getSLDaban())
+		{
+			cout << dsSach[i];
+		}
+	}
+}
+
+void NXB::LockedOrUnlocked()
+{
+	string name;
+	cin.ignore();
+	cout << "Nhap vao ten sach can Khoa/Mo: ";
+	getline(cin, name);
+	Sach* temp = findSachfromNXBList(name);
+	if (temp == NULL) return;
+	cout << "Sach tim duoc la:" << endl;
+	cout << *temp << endl;
+	if (temp->getAnSachNXB() == true)
+	{
+		cout << "Sach vua tim duoc da khoa." << endl;
+		int lenh;
+		cout << "Ban co muon mo khoa khong?" << endl;
+		cout << "(1) - Mo            (2) - Khoa" << endl;
+		cout << "Ban chon lenh nao: "; cin >> lenh;
+		if (lenh != 2)
+		{
+			temp->setAnSachNXb(false);
+		}
+	}
+	else
+	{
+		cout << "Sach vua tim duoc chua khoa." << endl;
+		int lenh;
+		cout << "Ban co muon khoa no khong?" << endl;
+		cout << "(1) - Mo            (2) - Khoa" << endl;
+		cout << "Ban chon lenh nao: "; cin >> lenh;
+		if (lenh != 1)
+		{
+			temp->setAnSachNXb(true);
+		}
+	}
 }
 
 void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
@@ -140,6 +217,7 @@ void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 	int lenh;
 	do
 	{
+		system("cls");
 		lenh = printMenu();
 		switch (lenh)
 		{
@@ -173,13 +251,30 @@ void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 		{
 			sendMessage();
 		}break;
+		case 6:
+		{
+			funReadMessage();
+		}break;
+		case 7:
+		{
+			cout << " Sach cua " << mTen << " da ban duoc " << countSoldBook() << " quyen." << endl;
+
+		}break;
+		case 8:
+		{
+			LockedOrUnlocked();
+		}break;
+		case 9:
+		{
+			bestSoldBook();
+		}break;
 		default:
 			lenh = 0;
-			cout << "Cam on ban da su dung sich vu vua chung toi." << endl;
+			cout << "Cam on ban da su dung dich vu vua chung toi." << endl;
 			break;
 			cout << endl;
 		}
-
+		system("pause>nul");
 	} while (lenh!=0);
 }
 

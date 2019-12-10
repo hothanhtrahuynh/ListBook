@@ -10,6 +10,16 @@ void UuDai_Sach::getData_UuDai_Sach(ListBook& lb)
 	this->sach = lb.timSach_Ten(tensach);
 }
 
+int UuDai_Sach::getTuoiUuDai()
+{
+	return 0;
+}
+
+Sach* UuDai_Sach::getSachUuDai()
+{
+	return sach;
+}
+
 void UuDai_Sach::getData_UuDai(ListBook& lb)
 {
 	this->sach = lb.timSach_Ten(tensach);

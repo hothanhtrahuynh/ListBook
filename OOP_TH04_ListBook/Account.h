@@ -34,6 +34,12 @@ public:
 		logned = false;
 		mTuoi = 0;
 	}
+	Account(string name, string pass, int tuoi)
+	{
+		mTen = name;
+		mPass = pass;
+		mTuoi = tuoi;
+	}
 	~Account();
 	void setTuoi(int tuoi);
 	int getTuoi();
@@ -55,7 +61,8 @@ public:
 
 
 	virtual void sendMessage() = 0;
-	void readMessage();
+	int readMessage();
+	void funReadMessage();
 
 
 	void print();

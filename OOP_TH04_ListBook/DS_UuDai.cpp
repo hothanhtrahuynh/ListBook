@@ -7,7 +7,7 @@ void DS_UuDai::xemDanhSachUudai()
 	cout << "======================" << endl;
 	for (int i = 0; i < dsuudai.size(); i++)
 	{
-		cout << "1.";
+		cout << i+1<<".";
 		dsuudai[i]->print();
 		cout << endl;
 	}
@@ -154,3 +154,16 @@ int DS_UuDai::xoaUuDai()
 	cout << "Xoa that bai." << endl;
 	return 0;
 }
+
+UuDai* DS_UuDai::timUUDaiTheoSach(string name)
+{
+	for (int i = 0; i < dsuudai.size(); i++)
+	{
+		if (dsuudai[i]->nameclass() == "UuDai_Sach" && dsuudai[i]->getSachUuDai()->getTenSach() == name)
+		{
+			return dsuudai[i];
+		}
+	}
+	return NULL;
+}
+

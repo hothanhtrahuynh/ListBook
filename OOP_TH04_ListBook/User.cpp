@@ -4,6 +4,7 @@
 
 User::User()
 {
+
 }
 
 
@@ -49,14 +50,16 @@ int User::printMenu()
 	cout << "==============" << endl;
 	cout << "||   USER   ||" << endl;
 	cout << "==============" << endl;
-	cout << "1. Xem sach." << endl;
-	cout << "2. Mua sach." << endl;
-	cout << "3. Xem Danh sach hoa don." << endl;
-	cout << "4. Chinh sua hoa don." << endl;
-	cout << "5. Xoa bot hoa don." << endl;
-	cout << "6. Tong tien ban da mua." << endl;
-	cout << "7. Gui tin nhan." << endl;
-	cout << "8. Doc tin nhan." << endl;
+	cout << "1. Xem danh sach sach." << endl;
+	cout << "2. Tim sach." << endl;
+	cout << "3. Mua sach." << endl;
+	cout << "4. Xem Danh sach hoa don." << endl;
+	cout << "5. Chinh sua hoa don." << endl;
+	cout << "6. Xoa bot hoa don." << endl;
+	cout << "7. Tong tien ban da mua." << endl;
+	cout << "8. Gui tin nhan." << endl;
+	cout << "9. Doc tin nhan." << endl;
+	cout << "10. Xem danh sach uu (cua rieng minh)." << endl;
 	cout << "0. Dang xuat." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
@@ -65,69 +68,87 @@ int User::printMenu()
 
 void User::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 {
-	lb.xuatDanhSachSach();
-	cout << endl;
-
 	freadFromFile();
+	loadfromTotalUuDai(dsud);
 	int lenh;
 	do
 	{
+		system("cls");
 		lenh = printMenu();
 		switch (lenh)
 		{
 		case 1:
 		{
-			lb.xuatDanhSachSach();
+			lb.xuatdanhsach_KhongAn();
 		}break;
 		case 2:
+		{
+			/*string name;
+			cin.ignore();
+			cout << "Nhap vao ten sach can tim: ";
+			getline(cin, name);
+			Sach* a = lb.timSach_Ten(name);
+			if (a == NULL) cout << "Khong co sach can tim." << endl;
+			else if (a->getAnSachTacGia() || a->getAnSachNXB())
+			{
+				cout << "Sach ban vua tim da duoc vi mot ly do nao do da bi Tac gia hoac Nha Xuat Ban an di." << endl;
+				cout << "Ban vui long tim sach khac." << endl;
+				break;
+			}
+			else
+			{
+				cout << "Sach can tim la: " << endl;
+				cout << (*a) << endl;
+			}*/
+			timSach(lb);
+			
+		}break;
+		case 3:
 		{
 			DS_HoaDon User_DSHD = muaSach(lb);
 			cout << endl;
 		}break;
-		case 3:
+		case 4:
 		{
+			cout << endl << "DANH SACH HOA DON " << endl;
 			DS_HoaDon  User_DSHD = getDanhSachHoaDon();
 			User_DSHD.xuatDSHoaDon();
 			cout << endl;
 		}break;
-		case 4:
+		case 5:
 		{
 			upDateHoaDon(lb);
 			cout << endl;
 		}break;
-		case 5:
+		case 6:
 		{
 			xoaHoaDon_DSHD();
 			cout << endl;
 		}break;
-		case 6:
+		case 7:
 		{
 			DS_HoaDon  User_DSHD = getDanhSachHoaDon();
 			cout << "Tong tien ma ban da mua la: " << User_DSHD.tongTienHoaDon() << endl;
 			cout << endl;
 		}break;
-		case 7:
+		case 8:
 		{
 			sendMessage();
 		}break;
-		case 8:
+		case 9:
 		{
-			cout << endl << "Tin nhan ban nhan duoc:" << endl;
-			readMessage();
-			cout << "=================" << endl;
-			cout << "Ban co muon tra loi tin nhan? " << endl;
-			int choice;
-			cout << "Tra loi(1) - De xem sau(0)." << endl;
-			cout << "Ban chon: "; cin >> choice;
-			if (choice == 1)
-			{
-				sendMessage();
-			}
+			funReadMessage();
+		}break;
+		case 10:
+		{
+			ud_user.xemDanhSachUudai();
+
 		}break;
 		default:
 			lenh = 0;
 			break;
 		}
+		system("pause>nul");
 	} while (lenh!=0);
 
 	fwriteToFile();
@@ -199,17 +220,12 @@ int User::checkExistAccount(string name_account)
 		}
 	}
 	f.close();
-	return 0; return 0;
+	return 0;
 }
 
 void User::fwriteToFile()
 {
 	string tenfile = mTen + ".txt";
-	/*char* c = new char[tenfile.size()];
-	copy(tenfile.begin(), tenfile.end(), c);
-	c[tenfile.size()] = '\0';
-	FILE* f = fopen(c, "ab");
-	if (f==NULL) { cout << "Khong mo duoc file." << endl; return; }*/
 	fstream f(tenfile, ios::out);
 	if (f.fail())
 	{
@@ -224,7 +240,7 @@ void User::fwriteToFile()
 void User::freadFromFile()
 {
 	string tenfile = mTen + ".txt";
-	fstream f(tenfile, ios::in);
+	fstream f(tenfile);
 	if (f.fail())
 	{
 		cout << "Khong mo duoc file" << endl;
@@ -232,4 +248,19 @@ void User::freadFromFile()
 	}
 	hd_user.freadFromFile(f);
 	f.close();
+}
+
+void User::loadfromTotalUuDai(DS_UuDai& dsuudai)
+{
+	vector<HoaDon> dshd;
+	dshd = hd_user.getDSHoaDon();
+	for (int i = 0; i < dshd.size(); i++)
+	{
+		string name=dshd[i].getSachTrongHoaDon().getTenSach();
+		UuDai* temp = dsuudai.timUUDaiTheoSach(name);
+		
+		if (temp != NULL)
+			ud_user.push_UuDai(temp);
+	}
+	
 }

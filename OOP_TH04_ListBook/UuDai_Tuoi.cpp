@@ -1,5 +1,15 @@
 #include "UuDai_Tuoi.h"
 
+int UuDai_Tuoi::getTuoiUuDai()
+{
+	return soTuoi;
+}
+
+Sach* UuDai_Tuoi::getSachUuDai()
+{
+	return nullptr;
+}
+
 void UuDai_Tuoi::getData_UuDai(ListBook& lb)
 {
 }

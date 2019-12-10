@@ -22,6 +22,12 @@ void Guest::timSach(ListBook& l)
 		cin.ignore();
 		cout << "Ten sach can tim la: "; getline(cin, ten);
 		a = l.timSach_Ten(ten);
+		if (a->getAnSachNXB() || a->getAnSachTacGia())
+		{
+			cout << "Sach ban vua tim da duoc vi mot ly do nao do da bi Tac gia hoac Nha Xuat Ban an di." << endl;
+			cout << "Ban vui long tim sach khac." << endl;
+			return;
+		}
 		if (a == NULL)
 		{
 			cout << "Khong co sach voi ten vua nhap." << endl;

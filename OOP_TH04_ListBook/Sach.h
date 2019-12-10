@@ -2,6 +2,7 @@
 #ifndef _SACH_H_
 #define _SACH_H_
 #include<iostream>
+#include<iomanip>
 #include<string>
 using namespace std;
 class Sach
@@ -14,6 +15,8 @@ private:
 	float gia;
 	//thêm thuộc tính ẩn
 	bool anTacGia, anNXB;
+	bool anSach_TacGia, anSach_NXB;
+
 	int sl_Daban;
 public:
 	Sach();
@@ -26,6 +29,8 @@ public:
 	void setNXB(string);
 	void setAnTacGia(bool a);
 	void setAnNXB(bool a);
+	void setAnSachTacGia(bool a);
+	void setAnSachNXb(bool a);
 	void setSLDaban(int sl);
 
 	int getMaSach();
@@ -35,6 +40,8 @@ public:
 	string getNXB();
 	bool getAnTacGia();
 	bool getAnNXB();
+	bool getAnSachTacGia();
+	bool getAnSachNXB();
 	int getSLDaban();
 
 	Sach* getBook();
@@ -45,7 +52,7 @@ public:
 	friend ostream& operator<<(ostream& ODev, Sach& a);
 	Sach& operator=(Sach a);
 	void filetoSach(char *a);
-	void sachToFile(fstream& f);
+	
 	~Sach();
 };
 #endif

@@ -4,5 +4,4 @@ int main()
 {
 	Manager library;
 	library.funRun();
-	
 }

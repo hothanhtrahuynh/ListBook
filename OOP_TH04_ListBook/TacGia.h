@@ -38,6 +38,15 @@ public:
 
 	int printMenu();
 
+	//đếm số sách của mình đã được bán
+	int countSoldBook();
+
+	//in ra sách được mua nhiều nhất
+	void bestSoldBook();
+
+	//Khóa hay mở sách của Tác Giả mà Tác giả muốn
+	void LOckedOrUnlocked();
+
 	virtual void funRunMenu(ListBook& lb, DS_UuDai& dsud);
 	virtual string nameclass();
 	virtual void sendMessage();

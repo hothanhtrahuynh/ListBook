@@ -68,7 +68,7 @@ void Account::setTypeofLognIn(bool a)
 void Account::getInfor_Message(string& name_account, string& text)
 {
 	cin.ignore();
-	cout << "Nhap vao ten Tac Gia muon gui tin nhan: ";
+	cout << "Nhap vao ten tai khoan muon gui tin nhan: ";
 	getline(cin, name_account);
 	cout << "Noi dung tin nhan ban muon gui: ";
 	getline(cin, text);
@@ -86,11 +86,11 @@ void Account::fwriteMessage(string& name_account, string& text)
 	f <<this->nameclass()<<"\t"<< this->mTen << "\t" << text << endl;
 }
 
-void Account::readMessage()
+int Account::readMessage()
 {
 	string tenfile = mTen + "_Message.txt";
 	fstream f(tenfile);
-	if (f.fail()) { cout << "Khong mo duoc file de doc tin nhan." << endl; return; }
+	if (f.fail()) { cout << "Khong mo duoc file de doc tin nhan." << endl; return-1; }
 	while (!f.eof())
 	{
 		string name_account, text;
@@ -113,17 +113,40 @@ void Account::readMessage()
 			}
 
 		}
-		Message temp(name_account, text);
+		Message temp(name_account, text,type_account);
 		dstn.push_back(temp);
 	}
 	for (int i = 0; i < dstn.size(); i++)
 	{
 		cout << dstn[i];
 	}
+
+	return dstn.size();
+}
+
+void Account::funReadMessage()
+{
+	cout << endl << "Tin nhan ban nhan duoc:" << endl;
+	int check = readMessage();
+	if (check == -1) return;
+	if (check == 0)
+	{
+		cout << "Ban chua nhan duoc tin nhan nao" << endl;
+		return;
+	}
+	cout << "=================" << endl;
+	cout << "Ban co muon tra loi tin nhan? " << endl;
+	int choice;
+	cout << "Tra loi(1) - De xem sau(0)." << endl;
+	cout << "Ban chon: "; cin >> choice;
+	if (choice == 1)
+	{
+		sendMessage();
+	}
 }
 
 void Account::print()
 {
-	cout << "" << " " << mTen << " " << mPass;
+	cout  << mTen <<setw(30)<< mPass;
 }
 

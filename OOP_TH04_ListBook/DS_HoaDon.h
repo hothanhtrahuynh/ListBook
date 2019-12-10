@@ -1,4 +1,6 @@
-#pragma once
+﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+
 #ifndef _DSHOADON_H_
 #define _DSHOADON_H_
 #include"HoaDon.h"
@@ -15,6 +17,9 @@ public:
 	int tongTienHoaDon();
 	int fwriteToFile(fstream& f);
 	int freadFromFile(fstream& f);
+
+	//lấy danh sách hóa đơn.
+	vector<HoaDon> getDSHoaDon();
 };
 
 #endif

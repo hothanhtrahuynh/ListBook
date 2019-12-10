@@ -17,8 +17,13 @@ public:
 	void addUuDai(ListBook& lb);
 
 	void writeDownUuDaiToFile();
+
 	void push_UuDai(UuDai* ud);
+
 	int xoaUuDai();
+
+
+	UuDai* timUUDaiTheoSach(string name);
 };
 
 #endif

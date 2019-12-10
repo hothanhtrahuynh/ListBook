@@ -1,2 +1,30 @@
-﻿  Header.cpp
-  OOP_TH04_ListBook.vcxproj -> D:\My Code\OOP\TH\OOP_ListBook1 - Copy\x64\Debug\OOP_TH04_ListBook.exe
+﻿  Account.cpp
+  Admin.cpp
+  DS_HoaDon.cpp
+  DS_UuDai.cpp
+  Guest.cpp
+  Header.cpp
+  HoaDon.cpp
+D:\GitHub\ListBook\OOP_TH04_ListBook\HoaDon.cpp(39,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ListBook.cpp
+  Main.cpp
+  Message.cpp
+  NXB.cpp
+D:\GitHub\ListBook\OOP_TH04_ListBook\HoaDon.cpp(52,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\ListBook\OOP_TH04_ListBook\NXB.cpp(15,16): warning C4390: ';': empty controlled statement found; is this the intent?
+D:\GitHub\ListBook\OOP_TH04_ListBook\NXB.cpp(67,6): warning C4101: 'gia': unreferenced local variable
+  Sach.cpp
+  Source.cpp
+  TacGia.cpp
+D:\GitHub\ListBook\OOP_TH04_ListBook\NXB.cpp(117,11): warning C4566: character represented by universal-character-name '\u1ECF' cannot be represented in the current code page (1252)
+D:\GitHub\ListBook\OOP_TH04_ListBook\TacGia.cpp(18,16): warning C4390: ';': empty controlled statement found; is this the intent?
+  User.cpp
+  UuDai.cpp
+  UuDai_Sach.cpp
+  UuDai_Tuoi.cpp
+  Generating Code...
+D:\GitHub\ListBook\OOP_TH04_ListBook\TacGia.cpp(131,11): warning C4566: character represented by universal-character-name '\u1ECF' cannot be represented in the current code page (1252)
+D:\GitHub\ListBook\OOP_TH04_ListBook\ListBook.cpp(123): warning C4715: 'ListBook::timSach': not all control paths return a value
+D:\GitHub\ListBook\OOP_TH04_ListBook\ListBook.cpp(158): warning C4715: 'ListBook::demSach': not all control paths return a value
+D:\GitHub\ListBook\OOP_TH04_ListBook\ListBook.cpp(270): warning C4715: 'ListBook::loadfromFile': not all control paths return a value
+  OOP_TH04_ListBook.vcxproj -> D:\GitHub\ListBook\x64\Debug\OOP_TH04_ListBook.exe

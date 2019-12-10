@@ -1,2 +1,2 @@
-1	Clean Code	Robert C.Martin	Software Process Naturalist	85000	0	0	0
-1 185000
+34	Mat Biec	Nguyen Nhat Anh	Tre	34600	4	0	0
+1 34600 0 0

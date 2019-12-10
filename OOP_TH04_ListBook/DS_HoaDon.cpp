@@ -1,9 +1,10 @@
-﻿#include "DS_HoaDon.h"
+﻿
+#include "DS_HoaDon.h"
 
 bool DS_HoaDon::checkEmpty()
 {
 	if(dshd.empty())
-	return true;
+		return true;
 	return false;
 }
 
@@ -51,12 +52,13 @@ void DS_HoaDon::upDateHoaDonThu(int pos, int soLuongMoi, ListBook& lb)
 	{
 		if (i == pos - 1)
 		{
+			int soLuongCu = dshd[i].getSoLuong();
 			dshd[i].setSoLuongSach(soLuongMoi);
 			Sach* a = lb.timSach_Ten(dshd[i].getSachTrongHoaDon().getTenSach());
-			a->setSLDaban(soLuongMoi - a->getSLDaban());
+			a->setSLDaban(soLuongMoi - soLuongCu);
 		}
 	}
-
+	cout << "Da cap nhat hoa don thanh cong" << endl;
 
 
 }
@@ -76,29 +78,62 @@ int DS_HoaDon::fwriteToFile(fstream& f)
 	for (int i = 0; i < dshd.size(); i++)
 	{
 		f << dshd[i].getSachTrongHoaDon().getMaSach() << "\t" << dshd[i].getSachTrongHoaDon().getTenSach() << "\t" << dshd[i].getSachTrongHoaDon().getTacGia() << "\t" << dshd[i].getSachTrongHoaDon().getNXB() << "\t" << dshd[i].getSachTrongHoaDon().getGiaSach() << "\t" << dshd[i].getSachTrongHoaDon().getSLDaban() << "\t" << dshd[i].getSachTrongHoaDon().getAnTacGia() << "\t" << dshd[i].getSachTrongHoaDon().getAnNXB() << "\n";
-		f << dshd[i].getSoLuong()<<" " << dshd[i].getTienHoaDon() << "\n";
+		f << dshd[i].getSoLuong()<<" " << dshd[i].getTienHoaDon() << " "<<dshd[i].getPayed()<<" "<<dshd[i].getAppliedPromotion()<<"\n";
 	}
-	
 	return 1;
 }
 
 int DS_HoaDon::freadFromFile(fstream& f)
-{
+ {
 	while (!f.eof())
 	{
 		char a[501];
 		f.getline(a, 500);
 		Sach temp;
 		string check(a);
-		if (check == "") continue;
+		if (check == "") break;
 		temp.filetoSach(a);
 		int sl, tien;
-		f >> sl >> tien;	
-		HoaDon* temp_hd = new HoaDon(temp, sl, tien);
-		dshd.push_back(*temp_hd);
+		bool payed, applied_pro;
+		f.getline(a, 500);
+		//f >> sl >> tien >> payed >> applied_pro;
+		char* p = NULL;
+		p = strtok(a, " ");
+		if (p == NULL) return -1;
+		sl = atoi(p);
+		for (int i = 1; i <= 3; i++)
+		{
+			p = strtok(NULL, " ");
+			if (p == NULL) continue;
+			switch (i)
+			{
+			case 1:
+			{
+				tien = atoi(p);
+			}break;
+			case 2:
+			{
+				payed = atoi(p);
+			}break;
+			case 3:
+			{
+				applied_pro = atoi(p);
+			}break;
+			default:
+				break;
+			}
+		}
+		HoaDon* temp_hd = new HoaDon(temp, sl, tien, payed, applied_pro);
+		if(temp_hd->getSachTrongHoaDon().getTenSach()!="noname")
+			dshd.push_back(*temp_hd);
 		delete temp_hd;
 	}
 	
 	return 1;
+}
+
+vector<HoaDon> DS_HoaDon::getDSHoaDon()
+{
+	return dshd;
 }
 

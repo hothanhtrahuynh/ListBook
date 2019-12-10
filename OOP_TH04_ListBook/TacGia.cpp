@@ -138,15 +138,92 @@ void TacGia::funRundeleBook()
 int TacGia::printMenu()
 {
 	int lenh;
+	cout << "================================" << endl;
+	cout << "|             TAC GIA          |" << endl;
+	cout << "================================" << endl;
 	cout << "1. Xem danh sach sach." << endl;
 	cout << "2. Them sach vao danh sach. " << endl; //(indivitual list book)
 	cout << "3. Cap nhat lai ten sach." << endl;
 	cout << "4. Xoa sach." << endl;
 	cout << "5. Gui tin nhan." << endl;
+	cout << "6. Doc tin nhan." << endl;
+	cout << "7. Thong ke sach da ban." << endl;
+	cout << "8. Khoa/Mo sach." << endl;
+	cout << "9. Sach co luot mua cao nhat." << endl;
 	cout << "0. Dang xuat (Thoat)." << endl;
 	cout << "Ban chon lenh nao: ";
 	cin >> lenh;
 	return lenh;
+}
+
+int TacGia::countSoldBook()
+{
+	int tong = 0;
+	for (int i = 0; i <dsSach.size(); i++)
+	{
+		tong += dsSach[i]->getSLDaban();
+	}
+	return tong;
+}
+
+void TacGia::bestSoldBook()
+{
+	cout << "========================================" << endl;
+	cout << "|     DANH SACH BAN CHAY CUA TAC GIA    |" << endl;
+	cout << "========================================" << endl;
+	int max = dsSach[0]->getSLDaban();
+	for (int i = 1; i < dsSach.size(); i++)
+	{
+		if (max < dsSach[i]->getSLDaban())
+		{
+			max = dsSach[i]->getSLDaban();
+		}
+	}
+
+	vector<Sach*>::iterator it;
+	for (it = dsSach.begin(); it != dsSach.end(); ++it)
+	{
+		if(max==(*it)->getSLDaban())
+			cout << *(*it) << endl;
+	}
+}
+
+void TacGia::LOckedOrUnlocked()
+{
+	string name;
+	cin.ignore();
+	cout << "Nhap vao ten sach can Khoa/Mo: ";
+	getline(cin, name);
+	Sach* temp = findSachfromTacGiaList(name);
+	if (temp == NULL) return;
+	cout << "Sach tim duoc la:" << endl;
+	cout << *temp << endl;
+	if (temp->getAnSachTacGia() == true)
+	{
+		cout << "Sach vua tim duoc da khoa." << endl;
+		int lenh;
+		cout << "Ban co muon mo khoa khong?" << endl;
+		cout << "(1) - Mo            (2) - Khoa" << endl;
+		cout << "Ban chon lenh nao: "; cin >> lenh;
+		if (lenh != 2)
+		{
+			temp->setAnSachTacGia(false);
+		}
+		cout << "BAN DA MO KHOA SACH THANH CONG." << endl;
+	}
+	else
+	{
+		cout << "Sach vua tim duoc chua khoa." << endl;
+		int lenh;
+		cout << "Ban co muon khoa no khong?" << endl;
+		cout << "(1) - Mo            (2) - Khoa" << endl;
+		cout << "Ban chon lenh nao: "; cin >> lenh;
+		if (lenh != 1)
+		{
+			temp->setAnSachTacGia(true);
+		}
+		cout << "BAN DA KHAO SACH THANH CONG." << endl;
+	}
 }
 
 void TacGia::funRunMenu(ListBook& lb, DS_UuDai& dsud)
@@ -155,6 +232,7 @@ void TacGia::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 	int lenh;
 	do
 	{
+		system("cls");
 		lenh = printMenu();
 		switch (lenh)
 		{
@@ -189,12 +267,28 @@ void TacGia::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 		{
 			sendMessage();
 		}break;
+		case 6:
+		{
+			funReadMessage();
+		}break;
+		case 7:
+		{
+			cout << "So sach cua tac gia da ban duoc tai quay sach la: " << countSoldBook() << endl;
+		}break;
+		case 8:
+		{
+			LOckedOrUnlocked();
+		}break;
+		case 9:
+		{
+			bestSoldBook();
+		}break;
 		default:
 			lenh = 0;
 			cout << "Cam on ban da su dung sich vu vua chung toi." << endl;
 			break;
 		}
-
+		system("pause>nul");
 	} while (lenh!=0);
 }
 

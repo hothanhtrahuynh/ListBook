@@ -20,6 +20,8 @@ public:
 	int getMucUuDai();
 
 
+	virtual int getTuoiUuDai() = 0;
+	virtual Sach* getSachUuDai() = 0;
 	virtual string nameclass() = 0;
 	virtual void getData_UuDai(ListBook& lb)=0;
 	virtual void print() = 0;

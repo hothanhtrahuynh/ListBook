@@ -1,0 +1,4 @@
+38	Chi Pheo	Nam Cao	Van Hoc	159200	2	0	0
+2 318400 0 0
+32	Toi Di Hoc	Nguyen Ngoc Ky	Tre	49300	0	0	0
+4 197200 0 0

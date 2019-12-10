@@ -1,0 +1,8 @@
+2	Co So Du Lieu	Dong Thi Bich Thuy	KH&KT	25000	0	0	0
+11 275000 0 0
+17	Toi Thay Hoa Vang Tren Co Xanh	Nguyen Nhat Anh	Tre	60000	0	0	0
+3 180000 0 0
+24	Khi nguoi ta lon	BS. Do Hong Ngoc	Tong hop	79200	0	0	0
+2 158400 0 0
+6	The Promise of Pencil	Adam Braun	The Gioi	129000	0	0	0
+2 258000 0 0
