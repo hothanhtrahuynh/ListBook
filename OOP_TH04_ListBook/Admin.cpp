@@ -421,6 +421,7 @@ void Admin::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 	
 	getData();
 	loadDSHoaDon();
+	ds_tn.freadMessageFromFile(mTen + "_Message.txt");
 	int lenh;
 	do
 	{
@@ -483,7 +484,8 @@ void Admin::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 			}break;
 			case 10:
 			{
-				funReadMessage();
+				//funReadMessage();
+				ds_tn.xuatDsTinNhan();
 			}break;
 			case 11:
 			{

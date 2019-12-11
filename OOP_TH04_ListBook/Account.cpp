@@ -86,9 +86,8 @@ void Account::fwriteMessage(string& name_account, string& text)
 	f <<this->nameclass()<<"\t"<< this->mTen << "\t" << text << endl;
 }
 
-int Account::readMessage()
+int Account::freadMessage(string tenfile)
 {
-	string tenfile = mTen + "_Message.txt";
 	fstream f(tenfile);
 	if (f.fail()) { cout << "Khong mo duoc file de doc tin nhan." << endl; return-1; }
 	while (!f.eof())
@@ -113,9 +112,18 @@ int Account::readMessage()
 			}
 
 		}
-		Message temp(name_account, text,type_account);
+		Message temp(name_account, text, type_account);
 		dstn.push_back(temp);
 	}
+	return 1 ;
+}
+
+int Account::readMessage()
+{
+	string tenfile = mTen + "_Message.txt";
+	
+	freadMessage(tenfile);
+
 	for (int i = 0; i < dstn.size(); i++)
 	{
 		cout << dstn[i];

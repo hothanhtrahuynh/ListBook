@@ -69,6 +69,9 @@
     <ClCompile Include="DS_UuDai.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DS_Message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sach.h">
@@ -117,6 +120,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DS_UuDai.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_Message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

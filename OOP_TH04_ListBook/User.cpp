@@ -70,6 +70,7 @@ void User::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 {
 	freadFromFile();
 	loadfromTotalUuDai(dsud);
+	ds_tn.freadMessageFromFile(mTen + "_Message.txt");
 	int lenh;
 	do
 	{
@@ -137,7 +138,9 @@ void User::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 		}break;
 		case 9:
 		{
-			funReadMessage();
+			
+			
+			ds_tn.xuatDsTinNhan();
 		}break;
 		case 10:
 		{

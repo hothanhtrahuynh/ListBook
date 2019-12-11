@@ -214,6 +214,7 @@ void NXB::LockedOrUnlocked()
 void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 {
 	getData(lb);
+	ds_tn.freadMessageFromFile(mTen + "_Message.txt");
 	int lenh;
 	do
 	{
@@ -253,7 +254,8 @@ void NXB::funRunMenu(ListBook& lb, DS_UuDai& dsud)
 		}break;
 		case 6:
 		{
-			funReadMessage();
+			//funReadMessage();
+			ds_tn.xuatDsTinNhan();
 		}break;
 		case 7:
 		{

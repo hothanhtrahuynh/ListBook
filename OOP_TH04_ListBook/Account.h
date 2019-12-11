@@ -2,7 +2,7 @@
 #define _ACCOUNT_H_
 #include"ListBook.h"
 #include"DS_UuDai.h"
-#include"Message.h"
+#include"DS_Message.h"
 //class Account
 //{
 //protected:
@@ -29,6 +29,7 @@ protected:
 	int mTuoi;
 	bool logned;
 	vector<Message> dstn;
+	DS_Message ds_tn;
 public:
 	Account() {
 		logned = false;
@@ -61,6 +62,9 @@ public:
 
 
 	virtual void sendMessage() = 0;
+
+	//đọc tin nhắn từ file
+	int freadMessage(string tenfile);
 	int readMessage();
 	void funReadMessage();
 

@@ -126,6 +126,7 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="DS_HoaDon.cpp" />
+    <ClCompile Include="DS_Message.cpp" />
     <ClCompile Include="DS_UuDai.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Header.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Account.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="DS_HoaDon.h" />
+    <ClInclude Include="DS_Message.h" />
     <ClInclude Include="DS_UuDai.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Header.h" />
